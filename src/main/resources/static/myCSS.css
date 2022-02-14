@@ -12,7 +12,7 @@ body {
   left: 0;
   background-color: #111;
   overflow-x: hidden;
-  padding-top: 20px;
+  padding-top: 5px;
 }
 
 .sidenav a {
@@ -27,11 +27,38 @@ body {
   color: #f1f1f1;
 }
 
+.sidenav h2 {
+	padding: 6px 8px 6px 16px;
+	color: #818181;
+}
+
 .main {
   margin-left: 160px; 
   font-size: 14px; 
   padding: 0px 10px;
 }
+
+#header {
+  height: 60px;
+}
+
+#header-content {
+  margin-left: 160px; 
+  font-size: 10px;
+  color: white;
+  padding: 0px 10px;
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding: 8px;
+}
+
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
