@@ -1,8 +1,9 @@
 package de.telekom.sea7.implementation;
 import org.springframework.stereotype.Service;
 
+
 @Service // Component-Annotation um die Klasse als BackEnd Service Klasse zu kennzeichnen 
-public class ZahlungImplService {
+public class ZahlungImplService  {
 	
 	// Properties
 	private String empfaenger;
@@ -12,20 +13,7 @@ public class ZahlungImplService {
 	private String waehrung;
 	private String verwendungszweck;
 	
-	
-	// Eigener Constructor mit Beispieldaten
-	public ZahlungImplService() {
-
-		this.empfaenger = "Test Empfänger";
-		this.empfaengerIBAN = "1TESTIBAN";
-		this.empfaengerBIC = "TESTBIC";
-		this.betrag = 123.45;
-		this.waehrung = "TESTgeld";
-		this.verwendungszweck = "Test Verwendungszweck";
 		
-	}
-
-	
 	// Get-/Set-Methoden
 	public String getEmpfaenger() {
 		return empfaenger;
@@ -74,5 +62,5 @@ public class ZahlungImplService {
 	public void setVerwendungszweck(String verwendungszweck) {
 		this.verwendungszweck = verwendungszweck;
 	}
-	
+
 }
