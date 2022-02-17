@@ -4,16 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="myCSS.css" >
-<script language= "javascript" type="text/javascript" scr="myJS.js"></script>
+<script type="text/javascript" src="myJS.js" type="module"></script>
 <title>Web-Banking</title>
 </head>
 
-<footer id="header">
-  <div id="header-content">
-  <p>made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p></div>
-</footer>
-
 <body>
+
+<header id="header">
+  <div id="header-content">
+  	<p>made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
+  </div>
+</header>
+
 <div class="sidenav">
   <h2>Web-Banking</h2>
   <a href="#home">Home</a>
@@ -23,13 +25,60 @@
 </div>
 
 <div class="main">
+	<p>Hier entsteht eine echt tolle Banking-Simulation.</p>
 	
-    <p>Hier entsteht eine echt tolle Banking-Simulation.</p>
+	<div id="ausgabeSingle">
+		<h3>Testzahlung</h3>
+		<p><strong>Empfänger: </strong>			<span id="empfaenger"></span>		</p>
+		<p><strong>IBAN: </strong>				<span id="iban"></span>				</p>
+		<p><strong>BIC: </strong>				<span id="bic"></span>				</p>
+		<p><strong>Betrag: </strong>			<span id="betrag"></span>			</p>
+		<p><strong>Währung: </strong>			<span id="waehrung"></span>			</p>
+		<p><strong>Verwendungszweck: </strong>	<span id="verwendungszweck"></span>	</p>
+	</div>
+	<div id="ausgabeSingleButton">
+	    <button id="btn" type="button">Daten abrufen</button>
+    </div>
+    
+    <script>
+    document.getElementById("btn").addEventListener("click", auslesen);
+
+    function auslesen() {
+        // Verarbeitung
+        fetch("zahlung.json")       		   // URL: was wird geholt
+            .then(empfaenger1)                 // Aufruf der Methode empfaenger1
+            .then(empfaenger2);                // Aufruf der Methode empfaenger2
+    }
+
+
+    function empfaenger1(antwort) {
+        var json = antwort.json();  			// Datenpaket auspacken
+        
+
+        
+        return json;                			// Datenpaket zurückgeben an Aufrufer der Funktion
+    }
+
+    function empfaenger2(json) {
+
+        var empfaenger 			= json.empfaenger; 
+        var iban 				= json.iban; 
+        var bic 				= json.bic;
+        var betrag 				= json.betrag;
+        var waehrung 			= json.waehrung;
+        var verwendungszweck 	= json.verwendungszweck;
+
+        document.getElementById("empfaenger").innerHTML			= empfaenger;
+        document.getElementById("iban").innerHTML				= iban;
+        document.getElementById("bic").innerHTML				= bic;
+        document.getElementById("betrag").innerHTML				= betrag;
+        document.getElementById("waehrung").innerHTML 			= waehrung;
+        document.getElementById("verwendungszweck").innerHTML   = verwendungszweck;
+
+    }
+    </script>
+	
 </div> 
-
-
-  
-
 
 </body>
 </html>

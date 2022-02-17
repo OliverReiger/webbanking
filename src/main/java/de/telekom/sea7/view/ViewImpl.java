@@ -1,27 +1,36 @@
 package de.telekom.sea7.view;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller // ein Controller ist ein Component der für eine View zuständig ist.
+import de.telekom.sea7.implementation.ZahlungImplService;
+
+@Controller // Annotation um zu singalisieren das dies unsere View (View-Controller) ist.
 public class ViewImpl {
 	
-	@GetMapping("index.html")
+	//Instanziierung einer Zahlungsreferenz mit Beispieldaten
+	@Autowired
+	ZahlungImplService dummyZahlung;
+	
+	
+	// Schnittstellenmethode die eine JSON zurückgibt
+	@GetMapping("zahlung.json")
 	@ResponseBody
-	public String getHTML() {
+	public String getJSON() {
+
 		return 
-				"<!doctype html>"
-				+ "<html>"
-				+ "  <head>"
-				+ "    <title>Hello from getHTML</title>"
-				+ "  </head>"
-				+ "  <body>"
-				+ "  </body>"
-				+ "/<html>";				
-		
+			  "{"
+			 //+" 'zahlung': {"
+			 +" \"empfaenger\": " 	   + "\"" + dummyZahlung.getEmpfaenger()		+ "\"" + ","
+			 +" \"iban\": "       	   + "\"" + dummyZahlung.getEmpfaengerIBAN()	+ "\"" + ","
+			 +" \"bic\": "        	   + "\"" + dummyZahlung.getEmpfaengerBIC()	    + "\"" + ","
+			 +" \"betrag\":"      	   + "\"" + dummyZahlung.getBetrag()			+ "\"" + ","
+			 +" \"waehrung\":"    	   + "\"" + dummyZahlung.getWaehrung()			+ "\"" + ","
+			 +" \"verwendungszweck\":" + "\"" + dummyZahlung.getVerwendungszweck()	+ "\""
+			 //+"},"
+			 +"}";
 	}
 	
-	
-
 }
