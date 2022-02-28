@@ -1,10 +1,12 @@
-package de.telekom.sea7.implementation;
+package de.telekom.sea7.model.implementation;
+
 import org.springframework.stereotype.Service;
 
+import de.telekom.sea7.model.Zahlung;
 
-@Service // Component-Annotation um die Klasse als BackEnd Service Klasse zu kennzeichnen 
-public class ZahlungImplService  {
-	
+@Service // Component-Annotation um die Klasse als BackEnd Service Klasse zu kennzeichnen
+public class ZahlungImplService implements Zahlung {
+
 	// Properties
 	private String empfaenger;
 	private String empfaengerIBAN;
@@ -13,50 +15,49 @@ public class ZahlungImplService  {
 	private String waehrung;
 	private String verwendungszweck;
 	
-		
 	// Get-/Set-Methoden
 	public String getEmpfaenger() {
 		return empfaenger;
 	}
 
-	public void setEmpfaenger(String empfaenger) {
-		this.empfaenger = empfaenger;
-	}
-
 	public String getEmpfaengerIBAN() {
 		return empfaengerIBAN;
+	}
+	
+	public String getEmpfaengerBIC() {
+		return empfaengerBIC;
+	}
+	
+	public double getBetrag() {
+		return betrag;
+	}
+	
+	public String getWaehrung() {
+		return waehrung;
+	}
+	
+	public String getVerwendungszweck() {
+		return verwendungszweck;
+	}
+	
+	public void setEmpfaenger(String empfaenger) {
+		this.empfaenger = empfaenger;
 	}
 
 	public void setEmpfaengerIBAN(String empfaengerIBAN) {
 		this.empfaengerIBAN = empfaengerIBAN;
 	}
 
-	public String getEmpfaengerBIC() {
-		return empfaengerBIC;
-	}
-
 	public void setEmpfaengerBIC(String empfaengerBIC) {
 		this.empfaengerBIC = empfaengerBIC;
-	}
-
-	public double getBetrag() {
-		return betrag;
 	}
 
 	public void setBetrag(double betrag) {
 		this.betrag = betrag;
 	}
 
-	public String getWaehrung() {
-		return waehrung;
-	}
-
 	public void setWaehrung(String waehrung) {
 		this.waehrung = waehrung;
-	}
-
-	public String getVerwendungszweck() {
-		return verwendungszweck;
 	}
 
 	public void setVerwendungszweck(String verwendungszweck) {

@@ -3,6 +3,21 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+#output {
+	font-size: 10px;
+	font-family: "Lato", sans-serif;
+}
+
+#beschriftung {
+	width: 150px;
+	float: left;
+}
+
+#info {
+	color: #204a87;
+	font-weight: bold;
+}
+
 .sidenav {
   height: 100%;
   width: 160px;
@@ -42,8 +57,13 @@ body {
   background-color: #F3F781;
   height: 200px;
   width: 400px;
-  font-size: 11px;
-  
+  font-size: 11px; 
+}
+
+#loginbereich {
+	font-size: 10px;
+	color:  #729fcf;
+	padding: 0px 10px;
 }
 
 #header {

@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="myCSS.css" >
-<script type="text/javascript" src="myJS.js" type="module"></script>
+<script defer src="testdaten.js" type="module" type="text/javascript"></script>
 <title>Web-Banking</title>
 </head>
 
 <header id="header" class="floatbox">
-  <div id="header-content" class="floatbox">
-    	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
-  </div>
+	<div id="header-content">
+  	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
+  	</div>
 </header>
 
 <body>
@@ -31,8 +31,11 @@
 </div>
 
 <div class="main">
-	<p>Hier entsteht eine echt tolle Banking-Simulation.</p>
+	<br/>
+    <p>Anzahl von Testdaten</p> 
+    <input id="inputUserTestdata" type="text">
+    <button id="button" type="button">Daten generieren</button>
 </div> 
-
 </body>
+
 </html>

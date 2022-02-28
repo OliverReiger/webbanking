@@ -5,9 +5,12 @@ import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import de.telekom.sea7.implementation.ZahlungImplService;
-import de.telekom.sea7.implementation.ZahlungenImplService;
+import de.telekom.sea7.model.implementation.ZahlungImplService;
+import de.telekom.sea7.model.implementation.ZahlungenImplService;
 
 
 @Controller // Annotation um zu singalisieren das dies unsere View (View-Controller) ist.
@@ -16,16 +19,21 @@ public class ViewImpl {
 	//Instanziierung einer Zahlungsreferenz
 	@Autowired
 	ZahlungImplService dummyZahlung1;
-	
-	@Autowired
-	ZahlungImplService dummyZahlung2;
-	
-	@Autowired
-	ZahlungImplService dummyZahlung3;
-	
 	@Autowired
 	ZahlungenImplService zahlungen;
 	
+	/** Methode wird über URL aufgerufen und erstellt ein Array mit einer
+	 *  beliebigen (übergebenen Anzahl) von Beispielzahlungen
+	 *  URL Aufruf: http://localhost:8080/createTestdata/1
+	 
+	@GetMapping("/createTestdata/{anzahl}")
+	@ResponseBody
+	public String createTestData(@PathVariable(name="anzahl") int anzahl) {
+		zahlungen.addTestzahlungen(anzahl);
+		return "Es wurden erfolgreich Daten erzeugt! <a href=\"/index.html\">Startseite</a>";
+	}
+	
+	*/
 	// Schnittstellenmethode die eine JSON über http://localhost:8080/zahlung.json zurückgibt
 	@GetMapping("/zahlung.json")
 	@ResponseBody
@@ -44,7 +52,7 @@ public class ViewImpl {
 			  "{"
 			 +" \"empfaenger\": " 	   + "\"" + dummyZahlung1.getEmpfaenger()		+ "\"" + ","
 			 +" \"iban\": "       	   + "\"" + dummyZahlung1.getEmpfaengerIBAN()	+ "\"" + ","
-			 +" \"bic\": "        	   + "\"" + dummyZahlung1.getEmpfaengerBIC()	    + "\"" + ","
+			 +" \"bic\": "        	   + "\"" + dummyZahlung1.getEmpfaengerBIC()	+ "\"" + ","
 			 +" \"betrag\":"      	   + "\"" + dummyZahlung1.getBetrag()			+ "\"" + ","
 			 +" \"waehrung\":"    	   + "\"" + dummyZahlung1.getWaehrung()			+ "\"" + ","
 			 +" \"verwendungszweck\":" + "\"" + dummyZahlung1.getVerwendungszweck()	+ "\""
@@ -52,15 +60,12 @@ public class ViewImpl {
 	}
 	
 	
-	@GetMapping("/zahlungen.json")
+	
+	//@GetMapping("/zahlungen.json")
+	@RequestMapping(value="/zahlungen.json", produces="application/json", method=RequestMethod.GET)
 	@ResponseBody
 	public String getZahlungen() {
-		
-		// Beispielzahlungen in das Array hinzufügen
-		zahlungen.add(dummyZahlung1);
-		zahlungen.add(dummyZahlung2);
-		zahlungen.add(dummyZahlung3);
-		
+				
 		// Deklaration Varible zur Erstellung des JSON Strings
 		String ergebnis = "{" ; 
 		

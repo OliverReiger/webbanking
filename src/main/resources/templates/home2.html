@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="myCSS.css" >
-<script type="text/javascript" src="myJS.js" type="module"></script>
 <title>Web-Banking</title>
 </head>
 
-<header id="header" class="floatbox">
-  <div id="header-content" class="floatbox">
-    	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
-  </div>
-</header>
-
 <body>
+
+<header id="header" class="floatbox">
+	<div id="header-content">
+  	<h3 th:text="|Hallo ${name}!|">Hallo World!</h3>
+  	</div>
+</header>
 
 <div class="sidenav">
   <h2>Web-Banking</h2>
   <br/>
   <a href="/index.html">Home</a>
-  <a href="/neuezahlung.html">Neue Zahlung</a>
+  <a href="#tbd">Neue Zahlung</a>
   <a href="/einzelabfrage.html">Einzelabfrage</a>
-  <a href="/allezahlungen.html">Übersicht Transaktionen</a>
+  <a href="/zahlungen.json">Übersicht Transaktionen</a>
   <a href="/testdaten.html">Zahlungen generieren</a>
-  <!-- <a href="/?kdnr=1234">Login Kd.1</a> -->
-  <!-- <a href="/?kdnr=2345">Login Kd.2</a> -->
+  <a href="/?kdnr=1234">Login Kd.1</a>
+  <a href="/?kdnr=2345">Login Kd.2</a>
   <a href="#tbd">Credits</a>
 </div>
 

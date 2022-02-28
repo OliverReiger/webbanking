@@ -1,9 +1,14 @@
 // Listener auf die Buttons
 document.getElementById("btn").addEventListener("click", auslesen);
 
+
 function auslesen() {
-    // Verarbeitung
-    fetch("zahlung.json")       		   // URL: was wird geholt
+	
+	var eingabeIDuser = document.getElementById("input").value;
+	var jsonURL = "einzelzahlung/" + eingabeIDuser;
+	// Verarbeitung
+        fetch(jsonURL)
+    // fetch("zahlung.json")       		   // URL: was wird geholt
         .then(empfaenger1)                 // Aufruf der Methode empfaenger1
         .then(empfaenger2);                // Aufruf der Methode empfaenger2
 }
@@ -20,8 +25,8 @@ function empfaenger1(antwort) {
 function empfaenger2(json) {
 
     var empfaenger 			= json.empfaenger; 
-    var iban 				= json.iban; 
-    var bic 				= json.bic;
+    var iban 				= json.empfaengerIBAN; 
+    var bic 				= json.empfaengerBIC;
     var betrag 				= json.betrag;
     var waehrung 			= json.waehrung;
     var verwendungszweck 	= json.verwendungszweck;

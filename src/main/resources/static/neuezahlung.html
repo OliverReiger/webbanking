@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="myCSS.css" >
+<script defer src="neuezahlung.js" type="module" type="text/javascript"></script>
+<title>Web-Banking</title>
+</head>
+
+<header id="header" class="floatbox">
+	<div id="header-content">
+  	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
+  	</div>
+</header>
+
+<body>
+
+<div class="sidenav">
+  <h2>Web-Banking</h2>
+  <br/>
+  <a href="/index.html">Home</a>
+  <a href="/neuezahlung.html">Neue Zahlung</a>
+  <a href="/einzelabfrage.html">Einzelabfrage</a>
+  <a href="/allezahlungen.html">Übersicht Transaktionen</a>
+  <a href="/testdaten.html">Zahlungen generieren</a>
+  <!-- <a href="/?kdnr=1234">Login Kd.1</a> -->
+  <!-- <a href="/?kdnr=2345">Login Kd.2</a> -->
+  <a href="#tbd">Credits</a>
+</div>
+
+<div class="main">
+	<br/>
+    <h3>Neue Zahlung erfassen</h3>
+    <br/>
+    <div id=beschriftung>Empfänger:</div> <input id="empf" type="text"> <br>
+    <div id=beschriftung>IBAN:</div> <input id="iban" type="text"><br>
+    <div id=beschriftung>BIC:</div> <input id="bic" type="text"><br>
+    <div id=beschriftung>Betrag:</div> <input id="betr" type="text"><br>
+    <div id=beschriftung>Währung:</div> <input id="waeh" type="text"><br>
+    <div id=beschriftung>Verwendungszweck:</div> <input id="verw" type="text"><br>
+    <br/>
+    <button id="button" type="button">senden</button>
+    <button id="zufall" type="button">Zufallsdaten</button>
+</div> 
+</body>
+
+</html>
