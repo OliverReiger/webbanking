@@ -52,19 +52,16 @@
 <div class="main">
 	<br/>
     <h3>Übersicht Zahlungen</h3>
-    <p>Eine Übersicht über all deine Transaktionen.</p>
-    <p>Kontostand/Umsatz: <span id="info"> KLICKE <button id="btnK" type="button">CHECK</button>! </span> Euro.</p>
-    <input type="button" id="table" value="Zahlungen laden" />
-    <br/>
-    <button onclick="window.location.href='/allezahlungen.html'">Reset</button>
-    <button id="btnK" type="button">New Check</button>
-    <button id="btnC" type="button">Chart Refresh</button>
-	<br/>
-	<br/>
+    <!-- <input type="button" id="table" value="Zahlungen laden" /> -->
+    <!-- <button onclick="window.location.href='/allezahlungen.html'">Reset</button> -->
+    <!-- <button id="btnK" type="button">New Check</button> -->
+    <!-- <button id="btnC" type="button">Chart Refresh</button> -->
+	<br/>	
 	<div id=output></div>
+	<p><span id="anzahl"> KLICKE <button id="btnA" type="button">ANZAHL</button>! </span> <span id="anzahl2"></span>  |  Kontostand: <span id="info"> KLICKE <button id="btnK" type="button">CHECK</button>! </span> Euro.</p>
 	<br/>
 	<br/>
-	<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+	<canvas id="myChart2" style="width:100%;max-width:300px"></canvas>
 </div> 
 </body>
 
@@ -74,9 +71,10 @@ tabelleAusJson();
 
 
 //Sammlung von Listener
-document.getElementById("table").addEventListener("click", tabelleAusJson);
-document.getElementById("btnK").addEventListener("click", kontostand);
-document.getElementById("btnC").addEventListener("click", chart);
+//document.getElementById("table").addEventListener("click", tabelleAusJson);
+//document.getElementById("btnK").addEventListener("click", kontostand);
+//document.getElementById("btnA").addEventListener("click", anzahl);
+//document.getElementById("btnC").addEventListener("click", chart);
 
 // VARIABLE MIT DYNAMISCHE TABELLE ERZEUGEN
 var table = document.createElement("table");
@@ -153,6 +151,8 @@ function empfaenger2(json) {
         var divContainer = document.getElementById("output");
         divContainer.innerHTML = "";
         divContainer.appendChild(table);
+        
+        // Zusatzdaten abrufen
         }
     
 function kontostand() {
@@ -167,13 +167,39 @@ function empfaengerKonto2(json) {
 	document.getElementById("info").innerHTML = json
 };
 
+function anzahl() {
+    var jsonURL = "/anzahlDB";
+	// Verarbeitung
+        fetch(jsonURL)
+        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
+        .then(empfaengeranzahl2);                // Aufruf der Methode empfaenger2
+}
+
+function empfaengeranzahl2(json) {
+	document.getElementById("anzahl").innerHTML = json
+	if (json == 1) {
+		document.getElementById("anzahl2").innerHTML = "Datensatz"
+	} else {
+		document.getElementById("anzahl2").innerHTML = "Datensätze"
+	}
+};
+
 
 function chart() {
     var jsonURL = "infoChart/";
 	// Verarbeitung
         fetch(jsonURL)
         .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
-        .then(empfaengerchart2);                // Aufruf der Methode empfaenger2
+        .then(empfaengerchart2);            // Aufruf der Methode empfaenger2
+}
+
+function chartEinAuszahlung() {
+    var json = "/poneUmsatzDB";
+	// Verarbeitung
+        fetch(json)
+        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
+        .then(poneUmsatz);        	 		// Aufruf der Methode empfaenger2 
+
 }
 
 function empfaengerchart2(json) {
@@ -193,6 +219,8 @@ var yValues = [umsatzPeggy, umsatzFranzi, umsatzOli, umsatzMarco, umsatzElisabet
 	
 var barColors = ["red","green","yellow", "blue", "orange", "red", "green", "yellow"];
 
+function einAuszahlungen(json) {
+
 new Chart("myChart", {
   type: "bar",
   data: {
@@ -210,11 +238,47 @@ new Chart("myChart", {
 	    }
 	  }
 	});
-	
+}
 };
 
+
+function poneUmsatz(json) {
+
+var positiv = json[0];	
+var negativ = json[1] * -1;	
+	
+var xValues = ["Zahlungseingänge", "Zahlungsausgänge"];
+var yValues = [positiv, negativ];
+var barColors = [
+	"#00aba9",
+	  "#b91d47"
+	  
+	];
+
+new Chart("myChart2", {
+	  type: "pie",
+	  data: {
+	    labels: xValues,
+	    datasets: [{
+	      backgroundColor: barColors,
+	      data: yValues
+	    }]
+	  },
+	  options: {
+	    title: {
+	      display: true,
+	      text: "Zahlungs Ein-/Ausgänge"
+	    }
+	  }
+	})
+};
+
+
+
+anzahl();
+kontostand();
+chartEinAuszahlung();
+
 </script>
-
-
 
 </html>

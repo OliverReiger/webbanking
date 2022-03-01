@@ -67,7 +67,7 @@ function zufall() {
 }
 
 function zufallBetrag() {
-	var min = 1;
+	var min = -1000;
 	var max = 1000;
 	var betrag = Math.floor(Math.random() * (max - min)) + min;
 	return betrag

@@ -8,9 +8,13 @@ import org.springframework.stereotype.Repository;
 public interface ZahlungenRepository extends JpaRepository<ZahlungE, Long>{
 
 	
+	@Query(value = "SELECT count(id) FROM zahlunge", nativeQuery = true)
+    public int anzahl();
+	
 	@Query(value = "SELECT sum(betrag) FROM zahlunge", nativeQuery = true)
     public Double umsatz();
-    
-
+	
+	@Query(value = "select(SELECT sum(betrag) FROM zahlunge WHERE betrag >0) plus,(SELECT sum(betrag) FROM zahlunge WHERE betrag <0) minus from dual", nativeQuery = true)
+	public Object poneUmsatz();
 	
 }
