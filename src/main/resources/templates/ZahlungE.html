@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Zahlung</title>
+</head>
+<body>
+<h3 th:text="${zahlung.id} ? 'Edit Zahlung' : 'Create Zahlung'">Zahlung</h3>
+<form method="post" th:action="@{/zahlungenDB/}" th:object="${zahlung}">
+    <input name="id" th:field="*{id}" type="hidden">
+    <label for="zahlung-empfaenger">Empfänger:</label>
+    <input id="zahlung-empfaenger" name="empfaenger" placeholder="..." required th:field="*{empfaenger}" type="text">
+
+    <br><br>
+
+    <label for="zahlung-empfaengerIban">IBAN:</label>
+    <input id="zahlung-empfaengerIban" name="empfaengerIban" placeholder="..." required th:field="*{empfaengerIban}" type="text">
+
+    <br><br>
+
+    <label for="zahlung-empfaengerBic">BIC:</label>
+    <input id="zahlung-empfaengerBic" name="empfaengerBic" placeholder="..." required th:field="*{empfaengerBic}" type="text">
+
+    <br><br>
+
+    <label for="zahlung-betrag">Betrag:</label>
+    <input id="zahlung-betrag" name="betrag" placeholder="..." required th:field="*{betrag}" type="text">
+
+    <br><br>
+
+    <label for="zahlung-waehrung">Währung:</label>
+    <input id="zahlung-waehrung" name="waehrung" placeholder="..." required th:field="*{waehrung}" type="text">
+
+    <br><br>
+
+    <label for="zahlung-verwendungszweck">Währung:</label>
+    <input id="zahlung-verwendungszweck" name="verwendungszweck" placeholder="..." required th:field="*{verwendungszweck}" type="text">
+
+    <br><br>
+
+    <input type="submit" value="Send">
+
+</form>
+
+</body>
+
+</html>

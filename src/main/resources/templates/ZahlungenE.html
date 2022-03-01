@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Zahlungen</title>
+</head>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    th, td {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 5px;
+        text-align: left;
+    }
+</style>
+
+<body>
+<h3>Zahlungen</h3>
+
+<a href="/newzahlungen">Neue Zahlung anlegen</a>
+<br><br>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Empfänger</th>
+        <th>IBAN</th>
+        <th>BIC</th>
+        <th>Betrag</th>
+        <th>Währung</th>
+        <th>Verwendungszweck</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="zahlungen : ${zahlungen}">
+
+        <td th:text="${zahlung.id}">id</td>
+
+        <td th:text="${zahlung.empfaenger}">first name</td>
+
+        <td th:text="${zahlung.empfaengerIban}">last name</td>
+
+        <td th:text="${zahlung.empfaengerBic}">birthday</td>
+
+        <td th:text="${zahlung.betrag}">birth place</td>
+
+        <td th:text="${zahlung.waehrung}">biography</td>
+
+        <td th:text="${zahlung.verwendungszweck}">muggle</td>
+        <td><a th:href="@{/zahlung(id=${zahlung.id})}">Edit</a></td>
+
+        <td><a th:href="@{/zahlung/delete(id=${zahlung.id})}">Remove</a></td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+</body>
+
+</html>
