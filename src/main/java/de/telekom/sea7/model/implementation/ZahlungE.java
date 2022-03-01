@@ -12,7 +12,7 @@ public class ZahlungE {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+				
 	@Column(name="empfaenger")
 	private String empfaenger;
 	@Column(name="empfaengerIBAN")

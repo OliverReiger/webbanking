@@ -3,7 +3,8 @@ document.getElementById("btn2").addEventListener("click", arraySize);
   
     function auslesen() {
        	var eingabeIDuser = document.getElementById("input").value;
-    	var jsonURL = "zahlung/" + eingabeIDuser;
+    	// var jsonURL = "zahlung/" + eingabeIDuser; -> Array List
+    	var jsonURL = "/oneZahlungDB/" + eingabeIDuser;
     	// Verarbeitung
             fetch(jsonURL)
             .then(empfaenger1)                 // Aufruf der Methode empfaenger1

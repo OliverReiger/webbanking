@@ -33,7 +33,8 @@ function post() {
 	var json = JSON.stringify(input)
 	
 	// Daten senden
-	fetch("/zahlung/",
+	// fetch("/zahlung/", -> ArrayList
+	fetch("/newZahlungDB/",
 	{
 		headers: {"Content-Type":"application/json"},
 		method: "POST",

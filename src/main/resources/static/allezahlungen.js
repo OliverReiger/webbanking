@@ -7,7 +7,8 @@ var table = document.createElement("table");
 
 // FUNKTIONSAUFRUF zum senden eines DELETE an WEBSERVER und RELOAD TABELLE
 function loescheZelle(i) {
-	fetch("/zahlung/" + i,
+	// fetch("/zahlung/" + i,
+	fetch("/zahlungDB/" + i,
 			{
 				headers: {"Content-Type":"application/json"},
 				method: "DELETE",
@@ -22,7 +23,8 @@ function loescheZelle(i) {
 // FUNKTIONSAUFRUF zum abholen der json Daten über REST API und Erzeugung einer Tabelle
 // Schritt 1: Vorbereitung des Abrufs und abholen der json
 function tabelleAusJson() {
-        var jsonURL = "/zahlungen/"			// URL zum Abfragen - REST API Get aus Java
+        var jsonURL = "/zahlungenDB/"	
+        //var jsonURL = "/zahlungen/"	  // URL zum Abfragen - REST API Get aus Java
         fetch(jsonURL)						// JSON abrufen
         .then(empfaenger1)
         .then(empfaenger2)

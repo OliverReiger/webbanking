@@ -69,6 +69,9 @@
 </body>
 
 <script>
+// Bei Start der Seite soll immer die Tabelle geladen werden
+tabelleAusJson();
+
 
 //Sammlung von Listener
 document.getElementById("table").addEventListener("click", tabelleAusJson);
@@ -80,7 +83,7 @@ var table = document.createElement("table");
 
 // FUNKTIONSAUFRUF zum senden eines DELETE an WEBSERVER und entfernen der Zeile aus der Tabelle
 function loescheZelle(i) {
-	fetch("/zahlung/" + i,
+	fetch("/deleteZahlungDB/" + i,
 			{
 				headers: {"Content-Type":"application/json"},
 				method: "DELETE",
@@ -88,14 +91,16 @@ function loescheZelle(i) {
 			}
 			).then(alert("Danke für die Nutzung unseres Webservices! Es wurden Ihnen Gebühren in Höhe von 0,05 Euro in Rechnung gestellt!"))
 	
-			zeile = table.deleteRow(i+1);
-
-}
+			// zeile = table.deleteRow(i+1);
+			
+			//Seite uneu laden
+			location.reload();
+		}
 
 // FUNKTIONSAUFRUF zum abholen der json Daten über REST API und Erzeugung einer Tabelle
 // Schritt 1: Vorbereitung des Abrufs und abholen der json
 function tabelleAusJson() {
-        var jsonURL = "/zahlungen/"			// URL zum Abfragen - REST API Get aus Java
+        var jsonURL = "/zahlungenDB"			// URL zum Abfragen - REST API Get aus Java
         fetch(jsonURL)						// JSON abrufen
         .then(empfaenger1)
         .then(empfaenger2)
@@ -113,8 +118,8 @@ function empfaenger1(antwort) {
 function empfaenger2(json) {
 	
         var spalte = [];
-        for (var i = 0; i < json.zahlungen.length; i++) {
-            for (var key in json.zahlungen[i]) {
+        for (var i = 0; i < json.length; i++) {
+            for (var key in json[i]) {
                 if (spalte.indexOf(key) === -1) {
                     spalte.push(key);
                 }
@@ -131,16 +136,17 @@ function empfaenger2(json) {
         }
         
         // Hinzufügen der Daten aus Json als Zeilen
-        for (var i = 0; i < json.zahlungen.length; i++) {
+        for (var i = 0; i < json.length; i++) {
             zeile = table.insertRow(-1);
 
             for (var j = 0; j < spalte.length; j++) {
                 var tabellenZellen = zeile.insertCell(-1);
-                tabellenZellen.innerHTML = json.zahlungen[i][spalte[j]];
+                tabellenZellen.innerHTML = json[i][spalte[j]];
                  }
                  // Erzeugen eines Links zum Aufruf der REST DELETE Methode über Link
+                 var link = json[i].id
                  var tabellenZellen = zeile.insertCell(-1);
-                 tabellenZellen.innerHTML = '<a href = "#" onclick="loescheZelle('+i+');" title="delete">delete</a>';
+                 tabellenZellen.innerHTML = '<a href = "#" onclick="loescheZelle('+link+');" title="delete">delete</a>';
           }
 
         // Erzeugte Tabelle mit den Daten aus Json Abruf in Div-Block ausgeben.
@@ -150,7 +156,7 @@ function empfaenger2(json) {
         }
     
 function kontostand() {
-    var jsonURL = "infoUmsatz/";
+    var jsonURL = "/umsatzDB";
 	// Verarbeitung
         fetch(jsonURL)
         .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
@@ -206,6 +212,7 @@ new Chart("myChart", {
 	});
 	
 };
+
 </script>
 
 

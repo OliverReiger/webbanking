@@ -17,6 +17,8 @@ import de.telekom.sea7.model.Zahlungen;
 import de.telekom.sea7.model.implementation.ZahlungImplService;
 import de.telekom.sea7.model.implementation.ZahlungenImplService;
 
+// Dieser REST Controller bedient eine Array List!!!!!
+
 @RestController
 public class TransactionController {
 	
