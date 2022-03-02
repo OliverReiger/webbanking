@@ -18,7 +18,7 @@ document.getElementById("btn2").addEventListener("click", arraySize);
 
     function empfaenger2(json) {
         var empfaenger 			= json.empfaenger; 
-        var iban 				= json.empfaengerIBAN; 
+        var iban 				= json.empfaengerIBAN.iban; 
         var bic 				= json.empfaengerBIC;
         var betrag 				= json.betrag;
         var waehrung 			= json.waehrung;

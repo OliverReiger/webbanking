@@ -3,8 +3,6 @@ package de.telekom.sea7.view;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +23,6 @@ public class ZahlungenController {
 
 	@Autowired
 	ZahlungenRepository zahlungen;
-	
 	@Autowired
 	IbanRepository ibans;
 
@@ -49,6 +46,7 @@ public class ZahlungenController {
 	@ResponseBody
 	public Optional<ZahlungE> getOne(@PathVariable(name = "id") Long id)  {
 		Optional<ZahlungE> zahlung = zahlungen.findById(id);
+		// zahlung.get().getEmpfaengerIBAN();
 		if (zahlung.isPresent()) {
 			return zahlung;
 		} else {

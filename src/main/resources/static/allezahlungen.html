@@ -75,17 +75,11 @@
 // Bei Start der Seite soll immer die Tabelle geladen werden
 tabelleAusJson();
 
-
-//Sammlung von Listener
-//document.getElementById("table").addEventListener("click", tabelleAusJson);
-//document.getElementById("btnK").addEventListener("click", kontostand);
-//document.getElementById("btnA").addEventListener("click", anzahl);
-//document.getElementById("btnC").addEventListener("click", chart);
-
-// VARIABLE MIT DYNAMISCHE TABELLE ERZEUGEN
+// GLOBALE VARIABLE FÜR DIE DYNAMISCHE TABELLE
 var table = document.createElement("table");
 
-// FUNKTIONSAUFRUF zum senden eines DELETE an WEBSERVER und entfernen der Zeile aus der Tabelle
+// FUNKTIONSAUFRUF zum senden eines DELETE an WEBSERVER und entfernen 
+// der Zeile aus der Tabelle - wird von tabelleAusJSON() aufgerufen
 function loescheZelle(i) {
 	fetch("/deleteZahlungDB/" + i,
 			{
@@ -93,34 +87,32 @@ function loescheZelle(i) {
 				method: "DELETE",
 				body: ""
 			}
-			).then(alert("Danke für die Nutzung unseres Webservices! Es wurden Ihnen Gebühren in Höhe von 0,05 Euro in Rechnung gestellt!"))
+			).then(alert("Danke für die Nutzung unseres Webservices!"))
 	
-			// zeile = table.deleteRow(i+1);
-			
-			//Seite uneu laden
+			//Seite und Tabelle aufgrund Autostart nach Löschvorgang neu laden
 			location.reload();
 		}
 
 // FUNKTIONSAUFRUF zum abholen der json Daten über REST API und Erzeugung einer Tabelle
 // Schritt 1: Vorbereitung des Abrufs und abholen der json
 function tabelleAusJson() {
-        var jsonURL = "/zahlungenDB"			// URL zum Abfragen - REST API Get aus Java
-        fetch(jsonURL)						// JSON abrufen
-        .then(empfaenger1)
-        .then(empfaenger2)
+        fetch("/zahlungenDB")				// JSON abrufen
+        .then(empfaenger1)					// Aufruf der Methode empfaenger1 (auspacken der JSON)
+        .then(empfaenger2)					// Generierung der Tabelle
     }
 
 // FUNKTIONSAUFRUF zum abholen der json Daten über REST API und Erzeugung einer Tabelle
-// Schritt 2: Auspacken der json und als Array weiterreichen   
+// Schritt 2: Entgegennehmen der json und auspacken   
 function empfaenger1(antwort) {
     var json = antwort.json();  			// Datenpaket auspacken
-    return json;                			// Datenpaket zurückgeben an Aufrufer der Funktion
+    return json;
 }
 
-// FUNKTIONSAUFRUF zum abholen der json Daten über REST API und Erzeugung einer Tabelle
-// Schritt 3: ex-json als Array verwenden um dynamisch eine Tabelle zu erzeugen  
+// FUNKTIONSAUFRUF zum Abholen der json Daten über REST API und Erzeugung einer Tabelle
+// Schritt 3: ausgepackte-json verarbeiten und nutzen für dynamischen Tabellenerzeugung  
 function empfaenger2(json) {
 	
+		// Ermittlung Abzahl Objekte für Tabelle und Erzeugung entsprechender Anzahl Spalten
         var spalte = [];
         for (var i = 0; i < json.length; i++) {
             for (var key in json[i]) {
@@ -139,48 +131,51 @@ function empfaenger2(json) {
             zeile.appendChild(ueberschrift);
         }
         
-        // Hinzufügen der Daten aus Json als Zeilen
+        // Hinzufügen notwendigen neuen Zeile
         for (var i = 0; i < json.length; i++) {
             zeile = table.insertRow(-1);
 
+        	// Einfügen der Werte in die Zeile
             for (var j = 0; j < spalte.length; j++) {
+                 	
                 var tabellenZellen = zeile.insertCell(-1);
                 tabellenZellen.innerHTML = json[i][spalte[j]];
-                 }
-                 // Erzeugen eines Links zum Aufruf der REST DELETE Methode über Link
-                 var link = json[i].id
-                 var tabellenZellen = zeile.insertCell(-1);
-                 tabellenZellen.innerHTML = '<a href = "#" onclick="loescheZelle('+link+');" title="delete">delete</a>';
+             }
+        	
+        	// Erzeugen eines Links zum Aufruf der REST DELETE Methode über Link
+            var link = json[i].id
+            var tabellenZellen = zeile.insertCell(-1);
+            tabellenZellen.innerHTML = '<a href = "#" onclick="loescheZelle('+link+');" title="delete">delete</a>';
           }
-
+        
         // Erzeugte Tabelle mit den Daten aus Json Abruf in Div-Block ausgeben.
         var divContainer = document.getElementById("output");
         divContainer.innerHTML = "";
         divContainer.appendChild(table);
         
-        // Zusatzdaten abrufen
         }
-    
+
+
+// Abfragen aller Umsätze aus der Zahlungstabelle
 function kontostand() {
-    var jsonURL = "/umsatzDB";
-	// Verarbeitung
-        fetch(jsonURL)
-        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
-        .then(empfaengerKonto2);                // Aufruf der Methode empfaenger2
+        fetch("/umsatzDB")
+        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
+        .then(empfaengerKonto2);            // Aufruf der Methode empfaenger2 (Setzen der ermittelten Werte in HTML)
 }
 
+// Funktion setzt die ermittelten Umsätze in der HTML Seite
 function empfaengerKonto2(json) {
 	document.getElementById("info").innerHTML = json
 };
 
+// Abfrage der Anzahl von Einträgen aus der DB
 function anzahl() {
-    var jsonURL = "/anzahlDB";
-	// Verarbeitung
-        fetch(jsonURL)
-        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
-        .then(empfaengeranzahl2);                // Aufruf der Methode empfaenger2
+        fetch("/anzahlDB")
+        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
+        .then(empfaengeranzahl2);           // Aufruf der Methode empfaenger2 (Setzen der ermittelten Werte in HTML)
 }
 
+// Funktion setzt die ermittelte Anzahl von Datensätzen als Wert in der HTML Seite
 function empfaengeranzahl2(json) {
 	document.getElementById("anzahl").innerHTML = json
 	if (json == 1) {
@@ -191,7 +186,7 @@ function empfaengeranzahl2(json) {
 };
 
 
-
+// Funktion kreiert ein Balkendiagramm mit Umsätzen pro Kategorie - NOCH NICHT LAUFFÄHIG
 function umsatzKategorieChart() {
 	// Einzelne Kategorien abfragen und Daten holen
 	//var kleidung = umsatzChartKleidung()[0];
@@ -225,14 +220,14 @@ function umsatzKategorieChart() {
 
 function umsatzChartKleidung() {
         fetch("/kleidungUmsatzDB")
-        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
+        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
         .then(empfaengerchart2);            // Aufruf der Methode empfaenger2
 }
 
 function umsatzChartFreizeit() {
     fetch("/freizeitUmsatzDB")
-    // .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
-    .then(empfaengerchart2);            // Aufruf der Methode empfaenger2
+    // .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
+    .then(empfaengerchart2);            	// Aufruf der Methode empfaenger2
 }
 
 
@@ -244,25 +239,23 @@ function empfaengerchart2(json) {
 
 // Daten für Positv-/Negativumsatzchart
 function chartEinAuszahlung() {
-    var json = "/poneUmsatzDB";
-	// Verarbeitung
-        fetch(json)
-        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
-        .then(poneUmsatz);        	 		// Aufruf der Methode empfaenger2 
+        fetch("/poneUmsatzDB")
+        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
+        .then(poneUmsatz);        	 		// Aufruf der Methode empfaenger2 (Erstellung Kreisdiagramm)
 
 }
 
+//Funktion kreiert ein Kreisdiagramm mit positiven/negativen Umsätzen
 function poneUmsatz(json) {
 
 var positiv = json[0];	
-var negativ = json[1] * -1;	
+var negativ = json[1] * -1;	 // negatives Vorzeichen mathematisch entfernen
 	
 var xValues = ["Zahlungseingänge", "Zahlungsausgänge"];
 var yValues = [positiv, negativ];
 var barColors = [
 	"#00aba9",
-	  "#b91d47"
-	  
+	"#b91d47"  
 	];
 
 new Chart("myChart2", {
@@ -284,7 +277,7 @@ new Chart("myChart2", {
 };
 
 
-
+// Autostart zahlreicher Methoden
 anzahl();
 kontostand();
 chartEinAuszahlung();
