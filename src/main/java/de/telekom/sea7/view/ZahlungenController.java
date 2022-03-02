@@ -101,7 +101,11 @@ public class ZahlungenController {
 	@GetMapping("/kleidungUmsatzDB")
 	@ResponseBody
 	public Double kateUmsatz() {
-		return zahlungen.umsatzKategorie("Kleidung");
+		var summe = zahlungen.umsatzKategorie("Kleidung");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	/**
@@ -111,7 +115,11 @@ public class ZahlungenController {
 	@GetMapping("/freizeitUmsatzDB")
 	@ResponseBody
 	public Double freizeitUmsatz() {
-		return zahlungen.umsatzKategorie("Freizeit");
+		var summe = zahlungen.umsatzKategorie("Freizeit");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	
@@ -122,7 +130,11 @@ public class ZahlungenController {
 	@GetMapping("/spendenUmsatzDB")
 	@ResponseBody
 	public Double spendenUmsatz() {
-		return zahlungen.umsatzKategorie("Spenden");
+		var summe = zahlungen.umsatzKategorie("Spenden");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	/**
@@ -132,7 +144,11 @@ public class ZahlungenController {
 	@GetMapping("/autoUmsatzDB")
 	@ResponseBody
 	public Double autoUmsatz() {
-		return zahlungen.umsatzKategorie("Auto");
+		var summe = zahlungen.umsatzKategorie("Auto");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	/**
@@ -142,7 +158,11 @@ public class ZahlungenController {
 	@GetMapping("/elektronikUmsatzDB")
 	@ResponseBody
 	public Double elektronikUmsatz() {
-		return zahlungen.umsatzKategorie("Elektronik");
+		var summe = zahlungen.umsatzKategorie("Elektronik");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	/**
@@ -152,7 +172,11 @@ public class ZahlungenController {
 	@GetMapping("/aboUmsatzDB")
 	@ResponseBody
 	public Double aboUmsatz() {
-		return zahlungen.umsatzKategorie("Abonements");
+		var summe = zahlungen.umsatzKategorie("Abonements");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	/**
@@ -162,7 +186,11 @@ public class ZahlungenController {
 	@GetMapping("/haushaltUmsatzDB")
 	@ResponseBody
 	public Double haushaltUmsatz() {
-		return zahlungen.umsatzKategorie("Haushalt");
+		var summe = zahlungen.umsatzKategorie("Haushalt");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	/**
@@ -172,7 +200,11 @@ public class ZahlungenController {
 	@GetMapping("/bildungUmsatzDB")
 	@ResponseBody
 	public Double bildungUmsatz() {
-		return zahlungen.umsatzKategorie("Bildung");
+		var summe = zahlungen.umsatzKategorie("Bildung");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	/**
@@ -182,7 +214,11 @@ public class ZahlungenController {
 	@GetMapping("/sonstigesUmsatzDB")
 	@ResponseBody
 	public Double sonstigesUmsatz() {
-		return zahlungen.umsatzKategorie("Sonstiges");
+		var summe = zahlungen.umsatzKategorie("Sonstiges");
+		if (summe == null) {
+			summe = 0.0;
+		}
+		return summe;
 	}
 	
 	/**

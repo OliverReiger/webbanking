@@ -54,16 +54,17 @@
     <h3>Übersicht Zahlungen</h3>
 	<br/>	
 	<div id=output></div>
-	<p><span id="anzahl"> KLICKE <button id="btnA" type="button">ANZAHL</button>! </span> <span id="anzahl2"></span>  |  Kontostand: <span id="info"> KLICKE <button id="btnK" type="button">CHECK</button>! </span> Euro.</p>
+	<p><span id="anzahl"> </span> <span id="anzahl2"></span>  |  Kontostand: <span id="info"> </span> Euro.</p>
+	<div>
+	<canvas id="myChart2" style="width:100%;max-width:200px;max-height:300px"></canvas>
+	</div >
 	<br/>
 	<br/>
-	<div id=box>
-	<canvas id="myChart1" style="width:100%;max-width:500px;max-height:500px"></canvas>
+	<div>
+	<canvas id="myChart1" style="width:100%;max-width:600px;max-height:500px"></canvas>
 	</div>
 	<br/>
-	<div id=box>
-	<canvas id="myChart2" style="width:100%;max-width:300px;max-height:300px"></canvas>
-	</div >
+
 
 </div> 
 </body>
@@ -196,14 +197,21 @@ function umsatzKategorieChartStart() {
 }	
 	
 
-// Funktion kreiert ein Balkendiagramm mit Umsätzen pro Kategorie - NOCH NICHT LAUFFÄHIG
+// Funktion kreiert ein Balkendiagramm mit Umsätzen pro Kategorie
 function umsatzKategorieChart() {
 	
 	// Einzelne Kategorien abfragen und Daten holen
 	// Multible Fetch-Anfragen
 	Promise.all([
 		fetch("/freizeitUmsatzDB"),
-		fetch("/kleidungUmsatzDB")
+		fetch("/kleidungUmsatzDB"),
+		fetch("/spendenUmsatzDB"),
+		fetch("/autoUmsatzDB"),
+		fetch("/elektronikUmsatzDB"),
+		fetch("/aboUmsatzDB"),
+		fetch("/haushaltUmsatzDB"),
+		fetch("/bildungUmsatzDB"),
+		fetch("/sonstigesUmsatzDB")
 	]).then(function (responses) {
 		// Get a JSON object from each of the responses
 		return Promise.all(responses.map(function (response) {
@@ -211,12 +219,11 @@ function umsatzKategorieChart() {
 		}));
 	}).then(function (data) {
 		// bei dem zurückgegebenen data handelt es um ein Array
-
-		
-		var xValues = ["Freizeit", "Kleidung"];
+	
+		var xValues = ["Freizeit", "Kleidung", "Spenden", "Auto", "Elektronik", "Abonements", "Haushalt", "Bildung", "Sonstiges"];
 		// Array für die Werte verwenden
 		var yValues = data
-		var barColors = ["red","green"];
+		var barColors = ["red","grey","yellow","pink", "orange","brown","purple","green","black"];
 	
 		new Chart("myChart1", {
 		  type: "bar",
