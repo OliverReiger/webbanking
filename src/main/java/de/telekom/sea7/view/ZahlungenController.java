@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import de.telekom.sea7.model.implementation.IbanRepository;
 import de.telekom.sea7.model.implementation.ZahlungE;
 import de.telekom.sea7.model.implementation.ZahlungenRepository;
 
@@ -24,6 +25,9 @@ public class ZahlungenController {
 
 	@Autowired
 	ZahlungenRepository zahlungen;
+	
+	@Autowired
+	IbanRepository ibans;
 
 	/**
 	 * REST API GET-Schnittstelle URL: http://localhost:8080/zahlungenDB
