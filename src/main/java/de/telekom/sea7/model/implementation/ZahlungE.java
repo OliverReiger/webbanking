@@ -25,6 +25,8 @@ public class ZahlungE {
 	private String waehrung;
 	@Column(name="verwendungszweck")
 	private String verwendungszweck;
+	@Column(name="kategorie")
+	private String kategorie;
 	
 	public ZahlungE() {
 	}
@@ -83,6 +85,14 @@ public class ZahlungE {
 
 	public void setVerwendungszweck(String verwendungszweck) {
 		this.verwendungszweck = verwendungszweck;
+	}
+	
+	public String getKategorie() {
+		return kategorie;
+	}
+
+	public void setKategorie(String kategorie) {
+		this.kategorie = kategorie;
 	}
 
 }

@@ -61,7 +61,13 @@
 	<p><span id="anzahl"> KLICKE <button id="btnA" type="button">ANZAHL</button>! </span> <span id="anzahl2"></span>  |  Kontostand: <span id="info"> KLICKE <button id="btnK" type="button">CHECK</button>! </span> Euro.</p>
 	<br/>
 	<br/>
-	<canvas id="myChart2" style="width:100%;max-width:300px"></canvas>
+	<div id=box>
+	<canvas id="myChart1" style="width:100%;max-width:500px;max-height:300px"></canvas>
+	</div>
+	<div id=box>
+	<canvas id="myChart2" style="width:100%;max-width:300px;max-height:300px"></canvas>
+	</div >
+
 </div> 
 </body>
 
@@ -185,14 +191,58 @@ function empfaengeranzahl2(json) {
 };
 
 
-function chart() {
-    var jsonURL = "infoChart/";
-	// Verarbeitung
-        fetch(jsonURL)
+
+function umsatzKategorieChart() {
+	// Einzelne Kategorien abfragen und Daten holen
+	//var kleidung = umsatzChartKleidung()[0];
+	var freizeit = fetch("/freizeitUmsatzDB");
+	
+	var freizeitValue = freizeit;
+
+	var xValues = ["Kleidung", "Freizeit"];
+	var yValues = [12, 24];
+	var barColors = ["red","green"];
+
+	new Chart("myChart1", {
+	  type: "bar",
+	  data: {
+	    labels: xValues,
+	    datasets: [{
+	      backgroundColor: barColors,
+	      data: yValues
+	    }]
+	  },
+	  options: {
+		    legend: {display: false},
+		    title: {
+		      display: true,
+		      text: "Umsätze nach Kategorien"
+		    }
+		  }
+		});
+	
+}
+
+function umsatzChartKleidung() {
+        fetch("/kleidungUmsatzDB")
         .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
         .then(empfaengerchart2);            // Aufruf der Methode empfaenger2
 }
 
+function umsatzChartFreizeit() {
+    fetch("/freizeitUmsatzDB")
+    // .then(empfaenger1)                 	// Aufruf der Methode empfaenger1
+    .then(empfaengerchart2);            // Aufruf der Methode empfaenger2
+}
+
+
+function empfaengerchart2(json) {
+	var umsatz 	= json[0]; 
+	return umsatz;
+};
+
+
+// Daten für Positv-/Negativumsatzchart
 function chartEinAuszahlung() {
     var json = "/poneUmsatzDB";
 	// Verarbeitung
@@ -201,46 +251,6 @@ function chartEinAuszahlung() {
         .then(poneUmsatz);        	 		// Aufruf der Methode empfaenger2 
 
 }
-
-function empfaengerchart2(json) {
-
-	var umsatzPeggy 	= json.Peggy; 
-    var umsatzFranzi	= json.Franzi; 
-    var umsatzOli		= json.Oli;
-    var umsatzMarco		= json.Marco;
-    var umsatzElisabeth	= json.Elisabeth;
-    var umsatzThorsten	= json.Thorsten;
-    var umsatzRobert	= json.Robert;
-    var umsatzMichael	= json.Michael;
-	
-var xValues = ["Peggy", "Franzi", "Oli", "Marco", "Elisabeth" , "Thorsten", "Robert", "Michael"];
-var yValues = [umsatzPeggy, umsatzFranzi, umsatzOli, umsatzMarco, umsatzElisabeth, umsatzThorsten, umsatzRobert, umsatzMichael];
-
-	
-var barColors = ["red","green","yellow", "blue", "orange", "red", "green", "yellow"];
-
-function einAuszahlungen(json) {
-
-new Chart("myChart", {
-  type: "bar",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-	    legend: {display: false},
-	    title: {
-	      display: true,
-	      text: "Umsätze nach Personen"
-	    }
-	  }
-	});
-}
-};
-
 
 function poneUmsatz(json) {
 
@@ -278,6 +288,7 @@ new Chart("myChart2", {
 anzahl();
 kontostand();
 chartEinAuszahlung();
+umsatzKategorieChart();
 
 </script>
 

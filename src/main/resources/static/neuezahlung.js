@@ -17,6 +17,8 @@ function post() {
 			alert("Du musst eine Währung angeben!");
 		} else if (document.getElementById("verw").value == "") {
 			alert("Du musst auch einen Verwendungszweck angeben!");
+		} else if (document.getElementById("kate").value == "") {
+			alert("Du musst auch einen Verwendungszweck angeben!");
 		} else {	
 	
 	// Eingaben auslesen
@@ -26,7 +28,8 @@ function post() {
 		empfaengerBIC: 		document.getElementById("bic").value,
 		betrag: 	  		document.getElementById("betr").value,
 		waehrung:   		document.getElementById("waeh").value,
-		verwendungszweck: 	document.getElementById("verw").value,		
+		verwendungszweck: 	document.getElementById("verw").value,	
+		kategorie:		 	document.getElementById("kate").value,	
 	}
 	
 	// String in json umwandeln
@@ -55,6 +58,7 @@ function zufall() {
 	var betrag 				= zufallBetrag();
 	var waehrung 			= "Euro";
 	var verwendungszweck 	= zufallZweck();
+	var kategorie			= zufallKategorie(verwendungszweck);
 	
 	// Werte setzen
 	document.getElementById("empf").value = empfaenger;
@@ -63,7 +67,7 @@ function zufall() {
 	document.getElementById("betr").value = betrag;
 	document.getElementById("waeh").value = waehrung;
 	document.getElementById("verw").value = verwendungszweck;
-		
+	document.getElementById("kate").value = kategorie;	
 }
 
 function zufallBetrag() {
@@ -95,9 +99,37 @@ function zufallBIC() {
 }
 
 function zufallZweck() {
-	var werte = ['Schuhe', 'Handtasche', 'Tickets', 'Spende', 'Mitgliedsbeitrag', 'Auto', 'Computer', 'Zweifelhaftes Abo', 'Gebühren', 'Haus', 'Haushaltshilfe', 'Schulgeld'];
+	var werte = ['Schuhe', 'Handtasche', 'Tickets', 'Spende', 'Mitgliedsbeitrag', 'Auto', 'Computer', 'Zweifelhaftes Abo', 'Netflix', 'Haus', 'Haushaltshilfe', 'Schulgeld' , 'Java Kurs'];
 	var zufall = Math.floor(Math.random()*werte.length);
 	var zweck = werte[zufall];
+		
 	return zweck
+}
+
+function zufallKategorie(zweck) {
+		
+	var kategorie = "";
+		
+	if (zweck == 'Schuhe' || zweck == 'Handtasche') {
+		kategorie = "Kleidung"
+	} else if (zweck == 'Tickets' || zweck == 'Mitgliedsbeitrag') {
+		kategorie = "Freizeit"
+	} else if (zweck == 'Spende') {
+		kategorie = "Spenden"
+	} else if (zweck == 'Auto') {
+		kategorie = "Auto"
+	} else if (zweck == 'Computer') {
+		kategorie = "Elektronik"
+	} else if (zweck == 'Zweifelhaftes Abo' || zweck == 'Netflix') {
+		kategorie = "Abonements"
+	} else if (zweck == 'Haus' || zweck == 'Haushaltshilfe') {
+		kategorie = "Haushalt"
+	} else if (zweck == 'Schulgeld' || zweck == 'Java Kurs') {
+		kategorie = "Bildung" 
+	} else {
+		kategorie = "Sonstiges"
+	}
+		
+	return kategorie
 }
 

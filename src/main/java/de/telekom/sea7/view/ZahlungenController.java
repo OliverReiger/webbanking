@@ -83,13 +83,104 @@ public class ZahlungenController {
 	}
 	
 	/**
-	 * REST API GET-Schnittstelle URL: http://localhost:8080/umsatzDB
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/poneUmsatzDB
 	 * @return Summe aller positiven und Summe aller negativen Beträge
 	 */
 	@GetMapping("/poneUmsatzDB")
 	@ResponseBody
 	public Object poneUmsatz() {
 		return zahlungen.poneUmsatz();
+	}
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/kleidungUmsatzDB
+	 * @return Summen aller Kategorien
+	 */
+	@GetMapping("/kleidungUmsatzDB")
+	@ResponseBody
+	public Double kateUmsatz() {
+		return zahlungen.umsatzKategorie("Kleidung");
+	}
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/freizeitUmsatzDB
+	 * @return Summe Kategorie
+	 */
+	@GetMapping("/freizeitUmsatzDB")
+	@ResponseBody
+	public Double freizeitUmsatz() {
+		return zahlungen.umsatzKategorie("Freizeit");
+	}
+	
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/spendenUmsatzDB
+	 * @return Summe Kategorie
+	 */
+	@GetMapping("/spendenUmsatzDB")
+	@ResponseBody
+	public Double spendenUmsatz() {
+		return zahlungen.umsatzKategorie("Spenden");
+	}
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/autoUmsatzDB
+	 * @return Summe Kategorie
+	 */
+	@GetMapping("/autoUmsatzDB")
+	@ResponseBody
+	public Double autoUmsatz() {
+		return zahlungen.umsatzKategorie("Auto");
+	}
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/autoUmsatzDB
+	 * @return Summe Kategorie
+	 */
+	@GetMapping("/elektronikUmsatzDB")
+	@ResponseBody
+	public Double elektronikUmsatz() {
+		return zahlungen.umsatzKategorie("Elektronik");
+	}
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/aboUmsatzDB
+	 * @return Summe Kategorie
+	 */
+	@GetMapping("/aboUmsatzDB")
+	@ResponseBody
+	public Double aboUmsatz() {
+		return zahlungen.umsatzKategorie("Abonements");
+	}
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/haushaltUmsatzDB
+	 * @return Summe Kategorie
+	 */
+	@GetMapping("/haushaltUmsatzDB")
+	@ResponseBody
+	public Double haushaltUmsatz() {
+		return zahlungen.umsatzKategorie("Haushalt");
+	}
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/bildungUmsatzDB
+	 * @return Summe Kategorie
+	 */
+	@GetMapping("/bildungUmsatzDB")
+	@ResponseBody
+	public Double bildungUmsatz() {
+		return zahlungen.umsatzKategorie("Bildung");
+	}
+	
+	/**
+	 * REST API GET-Schnittstelle URL: http://localhost:8080/sonstigesUmsatzDB
+	 * @return Summe Kategorie
+	 */
+	@GetMapping("/sonstigesUmsatzDB")
+	@ResponseBody
+	public Double sonstigesUmsatz() {
+		return zahlungen.umsatzKategorie("Sonstiges");
 	}
 	
 	/**

@@ -23,6 +23,10 @@ body {
 	font-weight: bold;
 }
 
+#box {
+	float: left;
+}
+
 .sidenav {
   height: 100%;
   width: 160px;
