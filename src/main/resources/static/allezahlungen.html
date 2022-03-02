@@ -52,18 +52,15 @@
 <div class="main">
 	<br/>
     <h3>Übersicht Zahlungen</h3>
-    <!-- <input type="button" id="table" value="Zahlungen laden" /> -->
-    <!-- <button onclick="window.location.href='/allezahlungen.html'">Reset</button> -->
-    <!-- <button id="btnK" type="button">New Check</button> -->
-    <!-- <button id="btnC" type="button">Chart Refresh</button> -->
 	<br/>	
 	<div id=output></div>
 	<p><span id="anzahl"> KLICKE <button id="btnA" type="button">ANZAHL</button>! </span> <span id="anzahl2"></span>  |  Kontostand: <span id="info"> KLICKE <button id="btnK" type="button">CHECK</button>! </span> Euro.</p>
 	<br/>
 	<br/>
 	<div id=box>
-	<canvas id="myChart1" style="width:100%;max-width:500px;max-height:300px"></canvas>
+	<canvas id="myChart1" style="width:100%;max-width:500px;max-height:500px"></canvas>
 	</div>
+	<br/>
 	<div id=box>
 	<canvas id="myChart2" style="width:100%;max-width:300px;max-height:300px"></canvas>
 	</div >
@@ -137,10 +134,16 @@ function empfaenger2(json) {
 
         	// Einfügen der Werte in die Zeile
             for (var j = 0; j < spalte.length; j++) {
-                 	
-                var tabellenZellen = zeile.insertCell(-1);
-                tabellenZellen.innerHTML = json[i][spalte[j]];
-             }
+                 	if (j == 2) {
+                 		var tabellenZellen = zeile.insertCell(-1);
+                 		var tempIBAN = json[i].empfaengerIBAN.iban;
+                        tabellenZellen.innerHTML = json[i].empfaengerIBAN.iban;
+                                                
+                 	} else {
+                 	 var tabellenZellen = zeile.insertCell(-1);
+                	 tabellenZellen.innerHTML = json[i][spalte[j]];
+            	 }
+        	}
         	
         	// Erzeugen eines Links zum Aufruf der REST DELETE Methode über Link
             var link = json[i].id
@@ -186,55 +189,58 @@ function empfaengeranzahl2(json) {
 };
 
 
+function umsatzKategorieChartStart() {
+	
+
+
+}	
+	
+
 // Funktion kreiert ein Balkendiagramm mit Umsätzen pro Kategorie - NOCH NICHT LAUFFÄHIG
 function umsatzKategorieChart() {
+	
 	// Einzelne Kategorien abfragen und Daten holen
-	//var kleidung = umsatzChartKleidung()[0];
-	var freizeit = fetch("/freizeitUmsatzDB");
+	// Multible Fetch-Anfragen
+	Promise.all([
+		fetch("/freizeitUmsatzDB"),
+		fetch("/kleidungUmsatzDB")
+	]).then(function (responses) {
+		// Get a JSON object from each of the responses
+		return Promise.all(responses.map(function (response) {
+			return response.json();
+		}));
+	}).then(function (data) {
+		// bei dem zurückgegebenen data handelt es um ein Array
+
+		
+		var xValues = ["Freizeit", "Kleidung"];
+		// Array für die Werte verwenden
+		var yValues = data
+		var barColors = ["red","green"];
 	
-	var freizeitValue = freizeit;
+		new Chart("myChart1", {
+		  type: "bar",
+		  data: {
+		    labels: xValues,
+		    datasets: [{
+		      backgroundColor: barColors,
+		      data: yValues
+		    }]
+		  },
+		  options: {
+			    legend: {display: false},
+			    title: {
+			      display: true,
+			      text: "Umsätze nach Kategorien"
+			    }
+			  }
+			});
 
-	var xValues = ["Kleidung", "Freizeit"];
-	var yValues = [12, 24];
-	var barColors = ["red","green"];
-
-	new Chart("myChart1", {
-	  type: "bar",
-	  data: {
-	    labels: xValues,
-	    datasets: [{
-	      backgroundColor: barColors,
-	      data: yValues
-	    }]
-	  },
-	  options: {
-		    legend: {display: false},
-		    title: {
-		      display: true,
-		      text: "Umsätze nach Kategorien"
-		    }
-		  }
-		});
 	
+	}).catch(function (error) {
+		console.log(error);
+	});
 }
-
-function umsatzChartKleidung() {
-        fetch("/kleidungUmsatzDB")
-        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
-        .then(empfaengerchart2);            // Aufruf der Methode empfaenger2
-}
-
-function umsatzChartFreizeit() {
-    fetch("/freizeitUmsatzDB")
-    // .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
-    .then(empfaengerchart2);            	// Aufruf der Methode empfaenger2
-}
-
-
-function empfaengerchart2(json) {
-	var umsatz 	= json[0]; 
-	return umsatz;
-};
 
 
 // Daten für Positv-/Negativumsatzchart
