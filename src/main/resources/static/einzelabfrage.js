@@ -23,12 +23,12 @@ document.getElementById("btn2").addEventListener("click", arraySize);
         var betrag 				= json.betrag;
         var waehrung 			= json.waehrung;
         var verwendungszweck 	= json.verwendungszweck;
-        document.getElementById("empfaenger").innerHTML			= empfaenger;
-        document.getElementById("iban").innerHTML				= iban;
-        document.getElementById("bic").innerHTML				= bic;
-        document.getElementById("betrag").innerHTML				= betrag;
-        document.getElementById("waehrung").innerHTML 			= waehrung;
-        document.getElementById("verwendungszweck").innerHTML   = verwendungszweck;
+        document.getElementById("empfaenger").value			= empfaenger;
+        document.getElementById("iban").value				= iban;
+        document.getElementById("bic").value				= bic;
+        document.getElementById("betrag").value				= betrag;
+        document.getElementById("waehrung").value 			= waehrung;
+        document.getElementById("verwendungszweck").value   = verwendungszweck;
     }
     
     function arraySize() {

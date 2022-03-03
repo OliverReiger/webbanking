@@ -24,30 +24,26 @@
   <a href="/neuezahlung.html">Neue Zahlung</a>
   <a href="/einzelabfrage.html">Einzelabfrage</a>
   <a href="/allezahlungen.html">Übersicht Transaktionen</a>
-  <a href="/testdaten.html">Zahlungen generieren</a>
-  <!-- <a href="/?kdnr=1234">Login Kd.1</a> -->
-  <!-- <a href="/?kdnr=2345">Login Kd.2</a> -->
-  <a href="#tbd">Credits</a>
+  <a href="/doku.html">Technische Dokumentation</a>
+  <a href="/credits.html">Credits</a>
 </div>
 
 <div class="main">
 	<br/>
 	<h3>Einzelabfrage</h3>
 	<p>Gib die ID einer Zahlung ein, die du im Detail betrachten willst:</p>
-	<p>Derzeit befinden sich <span id="info"> KLICKE <button id="btn2" type="button">CHECK</button>! </span> Elemente in der Liste!</p>
+	<p>Derzeit befinden sich folgende IDs für eine Betrachtung in der Datenbank: <span id="info"> </span> !</p>
 	<br/>
-	<p><strong>Empfänger: </strong>			<span id="empfaenger"></span>		</p>
-	<p><strong>IBAN: </strong>				<span id="iban"></span>				</p>
-	<p><strong>BIC: </strong>				<span id="bic"></span>				</p>
-	<p><strong>Betrag: </strong>			<span id="betrag"></span>			</p>
-	<p><strong>Währung: </strong>			<span id="waehrung"></span>			</p>
-	<p><strong>Verwendungszweck: </strong>	<span id="verwendungszweck"></span>	</p>
-	<br/>
-	
-	<div id="EingabeFeld">ZahlungsID eingeben <input id="input" type="text"></div>
-    <br/>
-    <button id="btn1" type="button">Daten abrufen</button>
-    <button id="btn2" type="button">New Check</button>
+	<div id="beschriftung">Empfänger:</div> <input id="empfaenger" type="text"> <br>
+    <div id="beschriftung">IBAN:</div> <input id="iban" type="text"><br>
+    <div id="beschriftung">BIC:</div> <input id="bic" type="text"><br>
+    <div id="beschriftung">Betrag:</div> <input id="betrag" type="text"><br>
+    <div id="beschriftung">Währung:</div> <input id="waehrung" type="text"><br>
+    <div id="beschriftung">Verwendungszweck:</div> <input id="verwendungszweck" type="text"><br>
+    <br>
+	<div id="beschriftung">ID prüfen: </div> <input id="input" type="text"><br/>
+    <button class="btn" id="btn1" type="button">Daten abrufen</button>
+
 </div> 
 
 </body>

@@ -1,6 +1,15 @@
 // Listener
 document.getElementById("button").addEventListener("click", post);
 document.getElementById("zufall").addEventListener("click", zufall);
+document.getElementById("test").addEventListener("click", testdata);
+
+function testdata() {
+	var anzahl = document.getElementById("anzt").value;
+	for (var i = 0; i < anzahl; i++) {
+		zufall();
+		post();
+	}
+}
 
 // Neuen Eintrag an REST API senden
 function post() {
@@ -78,28 +87,28 @@ function zufallBetrag() {
 }
 
 function zufallEmpfaenger() {
-	var werte = ["Andre", "Eckard", "Elisabeth", "Holger", "Franzi", "Marco", "Peggy", "Oli", "Thorsten", "Christof", "Michael", "Joachim", "Robert", "Felix"];
+	var werte = ["Andre", "Eckard", "Elisabeth", "Holger", "Franzi", "Marco", "Peggy", "Oli", "Thorsten", "Christof", "Michael", "Joachim", "Robert", "Felix", "Guido", "Heike"];
 	var zufall = Math.floor(Math.random()*werte.length);
 	var empfaenger = werte[zufall];
 	return empfaenger
 }
 
 function zufallIBAN() {
-	var werte = ['DE89370400440532013000', 'DE44880401230511099041', 'DE45368500110544055011', 'DE333704011147532044009', 'DE11770407740992099044'];
+	var werte = ['DE85370400440532013000', 'DE89385400640532813000','DE66370400440532013000','DE44880401230511099041', 'DE45368500110544055011', 'DE333704011147532044009', 'DE11770407740992099044'];
 	var zufall = Math.floor(Math.random()*werte.length);
 	var iban = werte[zufall];
 	return iban
 }
 
 function zufallBIC() {
-	var werte = ['BYLADEM1SAD', 'BYABCDM1SAD', 'CALADEM1ODD', 'ZZLADCE3SAD', 'DAABDEM9MUC'];
+	var werte = ['BYLADEM1SAD', 'BYABCDM1SAD', 'CALADEM1ODD', 'FEABTTM1SAD', 'ZZLADCE3SAD', 'DAABDEM9MUC'];
 	var zufall = Math.floor(Math.random()*werte.length);
 	var bic = werte[zufall];
 	return bic
 }
 
 function zufallZweck() {
-	var werte = ['Schuhe', 'Handtasche', 'Tickets', 'Spende', 'Mitgliedsbeitrag', 'Auto', 'Computer', 'Zweifelhaftes Abo', 'Netflix', 'Haus', 'Haushaltshilfe', 'Schulgeld' , 'Java Kurs'];
+	var werte = ['Schuhe', 'Handtasche', 'Hose', 'Tickets', 'Ausflug', 'Schafkopf', 'Urlaub', 'Mitgliedsbeitrag', 'Auto', 'Reifen', 'Computer', 'iPhone', 'Zweifelhaftes Abo', 'Netflix', 'MagentaTV Abo', 'Haus' , 'Grillstation', 'Haushaltshilfe', 'Schulgeld' , 'Java Kurs' , 'Fachbücher'];
 	var zufall = Math.floor(Math.random()*werte.length);
 	var zweck = werte[zufall];
 		
@@ -110,21 +119,21 @@ function zufallKategorie(zweck) {
 		
 	var kategorie = "";
 		
-	if (zweck == 'Schuhe' || zweck == 'Handtasche') {
+	if (zweck == 'Schuhe' || zweck == 'Handtasche' || zweck == 'Hose') {
 		kategorie = "Kleidung"
-	} else if (zweck == 'Tickets' || zweck == 'Mitgliedsbeitrag') {
+	} else if (zweck == 'Tickets' || zweck == 'Mitgliedsbeitrag' || zweck == 'Ausflug' || zweck == 'Urlaub' || zweck == 'Schafkopf') {
 		kategorie = "Freizeit"
 	} else if (zweck == 'Spende') {
 		kategorie = "Spenden"
-	} else if (zweck == 'Auto') {
+	} else if (zweck == 'Auto' || zweck == 'Reifen') {
 		kategorie = "Auto"
-	} else if (zweck == 'Computer') {
+	} else if (zweck == 'Computer' || zweck == 'iPhone') {
 		kategorie = "Elektronik"
-	} else if (zweck == 'Zweifelhaftes Abo' || zweck == 'Netflix') {
+	} else if (zweck == 'Zweifelhaftes Abo' || zweck == 'Netflix' || zweck == 'MagentaTV Abo') {
 		kategorie = "Abonements"
-	} else if (zweck == 'Haus' || zweck == 'Haushaltshilfe') {
+	} else if (zweck == 'Haus' || zweck == 'Haushaltshilfe' || zweck == 'Grillstation') {
 		kategorie = "Haushalt"
-	} else if (zweck == 'Schulgeld' || zweck == 'Java Kurs') {
+	} else if (zweck == 'Schulgeld' || zweck == 'Java Kurs' || zweck == 'Fachbücher') {
 		kategorie = "Bildung" 
 	} else {
 		kategorie = "Sonstiges"
