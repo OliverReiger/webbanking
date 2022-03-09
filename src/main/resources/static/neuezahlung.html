@@ -8,15 +8,12 @@
 <script defer src="neuezahlung.js" type="module" type="text/javascript"></script>
 <title>Web-Banking</title>
 </head>
-
 <header id="header" class="floatbox">
 	<div id="header-content">
-  	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
+  	<p>this tool is made with <a href="/bug.html"><img src="heart.png" alt="love" width="25" height="25"/></a> by SEA </p>>
   	</div>
 </header>
-
 <body>
-
 <div class="sidenav">
   <h2>Web-Banking</h2>
   <br/>
@@ -27,9 +24,7 @@
   <a href="/doku.html">Technische Dokumentation</a>
   <a href="/credits.html">Credits</a>
 </div>
-
 <div class="main">
-	<br/>
     <h3>Neue Zahlung erfassen</h3>
     <p>Erfasse manuell eine neue Zahlung.<p>
     <div id=beschriftung>Empfänger:</div> <input id="empf" type="text"> <br>
@@ -49,6 +44,11 @@
     <option value="Spenden">Spenden</option>
     <option value="Sonstiges">Sonstiges</option>
   </select><br>
+  <div id=beschriftung>Ziel:</div> <select name="Ziel" id="ziel">
+  	<option value="lokaleDatenbank">Lokale Datenbank</option>
+    <option value="lokaleArrayList">Lokale ArrayList</option>
+    <option value="webDatenbank">Web Datenbank</option>
+  </select><br>  
     <br/>
     <button class="btn" id="button" type="button">senden</button>
     <button class="btn" id="zufall" type="button">Zufallsdaten</button>
@@ -56,9 +56,13 @@
     <br/>
     <h3>Testdaten generieren</h3>
     <p>Gib die Anzahl von Testdaten an, welche per Zufall generiert werden sollen.<p>
-    <div id=beschriftung>Anzahl Datensätze</div> <input id="anzt" type="text"> <p>  <p>
+    <div id=beschriftung>Anzahl Datensätze</div> <input id="anzt" type="text"><br>
+    <div id=beschriftung>Ziel:</div> <select name="Ziel" id="zieltestdaten">
+  	<option value="lokaleDatenbank">Lokale Datenbank</option>
+    <option value="lokaleArrayList">Lokale ArrayList</option>
+    <option value="webDatenbank">Web Datenbank</option>
+  </select><br> 
     <button class="btn" id="test" type="button">Testdaten erzeugen</button>
 </div> 
 </body>
-
 </html>

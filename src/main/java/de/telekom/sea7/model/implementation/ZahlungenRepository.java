@@ -23,6 +23,4 @@ public interface ZahlungenRepository extends JpaRepository<ZahlungE, Long>{
 	@Query(value = "SELECT sum(betrag) FROM zahlunge WHERE kategorie = :kategorie", nativeQuery = true)
 	public Double umsatzKategorie(String kategorie);
 	
-	
-	
 }

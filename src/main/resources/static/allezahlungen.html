@@ -6,14 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="myCSS.css" >
-<!--   <script defer src="allezahlungen.js" type="module" type="text/javascript"></script>  -->
-
-
-
 <style>
-        th, td, p, input {
-            font:14px Verdana;
-        }
+   th, td, p, input { font:14px Verdana; }
         table, th, td 
         {
             border: solid 1px #DDD;
@@ -27,15 +21,12 @@
     </style>
 <title>Web-Banking</title>
 </head>
-
 <header id="header" class="floatbox">
 	<div id="header-content">
-  	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
+  	<p>this tool is made with <a href="/bug.html"><img src="heart.png" alt="love" width="25" height="25"/></a> by SEA </p>
   	</div>
 </header>
-
 <body>
-
 <div class="sidenav">
   <h2>Web-Banking</h2>
   <br/>
@@ -46,33 +37,71 @@
   <a href="/doku.html">Technische Dokumentation</a>
   <a href="/credits.html">Credits</a>
 </div>
-
 <div class="main">
-	<br/>
-    <h3>Übersicht Zahlungen</h3>
-	<br/>	
+    <h3>Übersicht Zahlungen <span id="outputquelle"></span> </h3>
 	<div id=output></div>
 	<p><span id="anzahl"> </span> <span id="anzahl2"></span>  |  Kontostand: <span id="info"> </span> Euro.</p>
-	<div>
-	<canvas id="myChart2" style="width:100%;max-width:200px;max-height:300px"></canvas>
-	</div >
+	
 	<br/>
-	<br/>
-	<div>
-	<canvas id="myChart1" style="width:100%;max-width:600px;max-height:500px"></canvas>
+    <h3>Dashboard <span id="outputquelle"></span></h3>
+    <p style="color:red;"><span id="chartinfo"></span> <p>
+	<div id="dashboard">
+	<div id="box">
+	<canvas id="myChart2" style="width:100%;max-width:200px;max-height:500px"></canvas>
 	</div>
-	<br/>
-
+	<div id="box4">
+	<canvas id="myChart1" style="width:100%;max-width:800px;max-height:800px"></canvas>
+	</div>
+	</div>
+	<br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/>
+    <h3>Quellen</h3>
+    <div id=beschriftung>Quelle:</div> <select name="Quelle" id="quelleAuswahl">
+    <option value="lokaleDatenbank">Lokale Datenbank</option>
+    <option value="lokaleArrayList">Lokale ArrayList</option>
+    <option value="webDatenbank">Web Datenbank</option>
+  </select><br>
+    <br/>
+    <button class="btn" id="quelle" type="button">Quelle ändern</button>
 
 </div> 
 </body>
-
 <script>
-// Bei Start der Seite soll immer die Tabelle geladen werden
-tabelleAusJson();
+document.getElementById("quelle").addEventListener("click", quellenCheck);
+
+quellenCheck();
+
+function quellenCheck() {
+	var auswahl = document.getElementById("quelleAuswahl").value
+	if (auswahl == "lokaleDatenbank") {
+		document.getElementById("outputquelle").innerHTML = "Lokale Datenbank"
+		tabelleAusJsonDB();		// Tabelle für lokale DB erzeugen
+		anzahl();				// Anzahl der Einträge in der DB ermitteln
+		kontostand();			// Kontostand aus der lokalen DB ermitteln
+		chartEinAuszahlung();	// Grafik über positive/negative Beträge erzeugen
+		umsatzKategorieChart();	// Grafik über Verteilung der Umsätze nach Kategorie erzeugen
+		showDashboard();		// Dashboard aktivieren und Info löschen
+	} else if (auswahl == "lokaleArrayList") {
+		document.getElementById("outputquelle").innerHTML = "Lokale ArrayList"
+		tabelleAusJsonArray()	// Tabelle für lokale Array List erzeugen
+		anzahlArray();			// Anzahl der Einträge in der DB ermitteln
+		kontostandArray();		// Kontostand aus der lokalen DB ermitteln
+		hideDashboard();		// Dashboard deaktivieren und Info anzeigen
+	} else if (auswahl == "webDatenbank") {
+		document.getElementById("outputquelle").innerHTML = "Web Datenbank"
+		tabelleAusJsonWeb()		// Tabelle für lokale Array List erzeugen
+		hideDashboard();		// Dashboard deaktivieren und Info anzeigen
+	}
+}
+
 
 // GLOBALE VARIABLE FÜR DIE DYNAMISCHE TABELLE
 var table = document.createElement("table");
+
+// ------------------------------------------------------------------------
+// FUNKTIONEN ZUR GENERIERUNG DER TABELLE MIT DATEN AUS LOKALEN DATENBANK
+// ------------------------------------------------------------------------
 
 // FUNKTIONSAUFRUF zum senden eines DELETE an WEBSERVER und entfernen 
 // der Zeile aus der Tabelle - wird von tabelleAusJSON() aufgerufen
@@ -91,7 +120,7 @@ function loescheZelle(i) {
 
 // FUNKTIONSAUFRUF zum abholen der json Daten über REST API und Erzeugung einer Tabelle
 // Schritt 1: Vorbereitung des Abrufs und abholen der json
-function tabelleAusJson() {
+function tabelleAusJsonDB() {
         fetch("/zahlungenDB")				// JSON abrufen
         .then(empfaenger1)					// Aufruf der Methode empfaenger1 (auspacken der JSON)
         .then(empfaenger2)					// Generierung der Tabelle
@@ -107,6 +136,10 @@ function empfaenger1(antwort) {
 // FUNKTIONSAUFRUF zum Abholen der json Daten über REST API und Erzeugung einer Tabelle
 // Schritt 3: ausgepackte-json verarbeiten und nutzen für dynamischen Tabellenerzeugung  
 function empfaenger2(json) {
+		table.clear;
+		table = document.createElement("table");
+		
+	
 	
 		// Ermittlung Abzahl Objekte für Tabelle und Erzeugung entsprechender Anzahl Spalten
         var spalte = [];
@@ -156,6 +189,162 @@ function empfaenger2(json) {
         divContainer.appendChild(table);
         
         }
+        
+        
+//------------------------------------------------------------------------
+//FUNKTIONEN ZUR GENERIERUNG DER TABELLE MIT DATEN AUS ARRAY LIST
+//------------------------------------------------------------------------
+
+//FUNKTIONSAUFRUF zum senden eines DELETE an WEBSERVER und entfernen 
+//der Zeile aus der Tabelle - wird von tabelleAusJSON() aufgerufen
+function loescheZelleArray(i) {
+	fetch("/zahlung/" + i,
+			{
+				headers: {"Content-Type":"application/json"},
+				method: "DELETE",
+				body: ""
+			}
+			).then(alert("Danke für die Nutzung unseres Webservices! Es wurden Ihnen Gebühren in Höhe von 0,05 Euro in Rechnung gestellt!"))
+
+			zeile = table.deleteRow(i+1);
+
+}
+
+//FUNKTIONSAUFRUF zum abholen der json Daten über REST API und Erzeugung einer Tabelle
+//Schritt 1: Vorbereitung des Abrufs und abholen der json
+function tabelleAusJsonArray() {
+     fetch("/zahlungen/")				// JSON abrufen
+     .then(empfaenger1)					// Aufruf der Methode empfaenger1 (auspacken der JSON)
+     .then(empfaenger2Array)			// Generierung der Tabelle
+ }
+
+//FUNKTIONSAUFRUF zum Abholen der json Daten über REST API und Erzeugung einer Tabelle
+//Schritt 3: ausgepackte-json verarbeiten und nutzen für dynamischen Tabellenerzeugung  
+function empfaenger2Array(json) {
+	
+	table.clear;
+	table = document.createElement("table");
+	
+		// Ermittlung Abzahl Objekte für Tabelle und Erzeugung entsprechender Anzahl Spalten
+     var spalte = [];
+     for (var i = 0; i < json.zahlungen.length; i++) {
+         for (var key in json.zahlungen[i]) {
+             if (spalte.indexOf(key) === -1) {
+                 spalte.push(key);
+             }
+         }
+     }
+
+      // TABELLEN Überschriften erstellen aus den Variablennamen der Json
+     var zeile = table.insertRow(-1);                   		 // TABELLEN ZEILE.
+
+     for (var i = 0; i < spalte.length; i++) {
+         var ueberschrift = document.createElement("th");        // TABELLEN ÜBERSCHRIFT.
+         ueberschrift.innerHTML = spalte[i];
+         zeile.appendChild(ueberschrift);
+     }
+     
+     // Hinzufügen notwendigen neuen Zeile
+     for (var i = 0; i < json.zahlungen.length; i++) {
+         zeile = table.insertRow(-1);
+
+     	// Einfügen der Werte in die Zeile
+         for (var j = 0; j < spalte.length; j++) {
+              	 var tabellenZellen = zeile.insertCell(-1);
+             	 tabellenZellen.innerHTML = json.zahlungen[i][spalte[j]];
+         	 }
+     	
+     	
+     	// Erzeugen eines Links zum Aufruf der REST DELETE Methode über Link
+         var tabellenZellen = zeile.insertCell(-1);
+         tabellenZellen.innerHTML = '<a href = "#" onclick="loescheZelleArray('+i+');" title="delete">delete</a>';
+     }
+     
+     // Erzeugte Tabelle mit den Daten aus Json Abruf in Div-Block ausgeben.
+     var divContainer = document.getElementById("output");
+     divContainer.innerHTML = "";
+     divContainer.appendChild(table);
+     
+   }
+     
+     
+     
+//------------------------------------------------------------------------
+//FUNKTIONEN ZUR GENERIERUNG DER TABELLE MIT DATEN AUS WEB Datenbank
+//------------------------------------------------------------------------
+
+//FUNKTIONSAUFRUF zum senden eines DELETE an WEBSERVER und entfernen 
+//der Zeile aus der Tabelle - wird von tabelleAusJSON() aufgerufen
+function loescheZelleWeb(i) {
+	fetch("/zahlung/" + i,
+			{
+				headers: {"Content-Type":"application/json"},
+				method: "DELETE",
+				body: ""
+			}
+			).then(alert("Danke für die Nutzung unseres Webservices! Es wurden Ihnen Gebühren in Höhe von 0,05 Euro in Rechnung gestellt!"))
+
+			zeile = table.deleteRow(i+1);
+
+}
+
+//FUNKTIONSAUFRUF zum abholen der json Daten über REST API und Erzeugung einer Tabelle
+//Schritt 1: Vorbereitung des Abrufs und abholen der json
+function tabelleAusJsonWeb() {
+   fetch("https://www.streetball-summer-league.de/overview.php", {mode:'cors'})
+   .then(empfaenger1)					// Aufruf der Methode empfaenger1 (auspacken der JSON)
+   .then(empfaenger2Web)				// Generierung der Tabelle
+}
+
+//FUNKTIONSAUFRUF zum Abholen der json Daten über REST API und Erzeugung einer Tabelle
+//Schritt 3: ausgepackte-json verarbeiten und nutzen für dynamischen Tabellenerzeugung  
+function empfaenger2Web(json) {
+	
+	table.clear;
+	table = document.createElement("table");
+	
+		// Ermittlung Abzahl Objekte für Tabelle und Erzeugung entsprechender Anzahl Spalten
+   var spalte = [];
+   for (var i = 0; i < json.length; i++) {
+       for (var key in json[i]) {
+           if (spalte.indexOf(key) === -1) {
+               spalte.push(key);
+           }
+       }
+   }
+
+    // TABELLEN Überschriften erstellen aus den Variablennamen der Json
+   var zeile = table.insertRow(-1);                   		 // TABELLEN ZEILE.
+
+   for (var i = 0; i < spalte.length; i++) {
+       var ueberschrift = document.createElement("th");        // TABELLEN ÜBERSCHRIFT.
+       ueberschrift.innerHTML = spalte[i];
+       zeile.appendChild(ueberschrift);
+   }
+   
+   // Hinzufügen notwendigen neuen Zeile
+   for (var i = 0; i < json.length; i++) {
+       zeile = table.insertRow(-1);
+
+   	// Einfügen der Werte in die Zeile
+       for (var j = 0; j < spalte.length; j++) {
+            	 var tabellenZellen = zeile.insertCell(-1);
+           	 tabellenZellen.innerHTML = json[i][spalte[j]];
+       	 }
+   	
+   	
+   	// Erzeugen eines Links zum Aufruf der REST DELETE Methode über Link
+       var tabellenZellen = zeile.insertCell(-1);
+       tabellenZellen.innerHTML = '<a href = "#" onclick="loescheZelleArray('+i+');" title="delete">delete</a>';
+   }
+   
+   // Erzeugte Tabelle mit den Daten aus Json Abruf in Div-Block ausgeben.
+   var divContainer = document.getElementById("output");
+   divContainer.innerHTML = "";
+   divContainer.appendChild(table);
+   
+ }
+     
 
 
 // Abfragen aller Umsätze aus der Zahlungstabelle
@@ -165,14 +354,27 @@ function kontostand() {
         .then(empfaengerKonto2);            // Aufruf der Methode empfaenger2 (Setzen der ermittelten Werte in HTML)
 }
 
+function kontostandArray() {
+    fetch("/infoUmsatz/")
+    .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
+    .then(empfaengerKonto2);            // Aufruf der Methode empfaenger2 (Setzen der ermittelten Werte in HTML)
+}
+
 // Funktion setzt die ermittelten Umsätze in der HTML Seite
 function empfaengerKonto2(json) {
+	var json = (json.toFixed(2));
 	document.getElementById("info").innerHTML = json
 };
 
 // Abfrage der Anzahl von Einträgen aus der DB
 function anzahl() {
         fetch("/anzahlDB")
+        .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
+        .then(empfaengeranzahl2);           // Aufruf der Methode empfaenger2 (Setzen der ermittelten Werte in HTML)
+}
+
+function anzahlArray() {
+        fetch("/info/")
         .then(empfaenger1)                 	// Aufruf der Methode empfaenger1 (auspacken der JSON)
         .then(empfaengeranzahl2);           // Aufruf der Methode empfaenger2 (Setzen der ermittelten Werte in HTML)
 }
@@ -188,12 +390,6 @@ function empfaengeranzahl2(json) {
 };
 
 
-function umsatzKategorieChartStart() {
-	
-
-
-}	
-	
 
 // Funktion kreiert ein Balkendiagramm mit Umsätzen pro Kategorie
 function umsatzKategorieChart() {
@@ -262,10 +458,10 @@ function poneUmsatz(json) {
 var positiv = json[0];	
 var negativ = json[1] * -1;	 // negatives Vorzeichen mathematisch entfernen
 	
-var xValues = ["Zahlungseingänge", "Zahlungsausgänge"];
+var xValues = ["Eingang", "Ausgang"];
 var yValues = [positiv, negativ];
 var barColors = [
-	"#00aba9",
+	"#1e7145",
 	"#b91d47"  
 	];
 
@@ -288,11 +484,18 @@ new Chart("myChart2", {
 };
 
 
-// Autostart zahlreicher Methoden
-anzahl();
-kontostand();
-chartEinAuszahlung();
-umsatzKategorieChart();
+function hideDashboard() {
+	  document.getElementById("chartinfo").innerHTML = "Sorry, für WebDatenbank und Arraylist haben wir keine Charts implementiert!";
+	  var x = document.getElementById("dashboard");
+	  x.style.display = "none";
+	} 
+	
+function showDashboard() {
+	  document.getElementById("chartinfo").innerHTML = "";
+	  var x = document.getElementById("dashboard");
+	  x.style.display = "block";
+	}
+
 
 </script>
 

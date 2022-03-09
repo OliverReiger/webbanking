@@ -8,15 +8,12 @@
 <script defer src="doku.js" type="module" type="text/javascript"></script>
 <title>Web-Banking</title>
 </head>
-
 <header id="header" class="floatbox">
 	<div id="header-content">
-  	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
+  	<p>this tool is made with <a href="/bug.html"><img src="heart.png" alt="love" width="25" height="25"/></a> by SEA </p>
   	</div>
 </header>
-
 <body>
-
 <div class="sidenav">
   <h2>Web-Banking</h2>
   <br/>
@@ -27,12 +24,162 @@
   <a href="/doku.html">Technische Dokumentation</a>
   <a href="/credits.html">Credits</a>
 </div>
-
 <div class="main">
 	<h3>Technische Dokumentation</h3>
-    <p>Hier findest du technische Informationen z.B. über die eingesetzten Technologien,</p> 
-   	<p>sowie der Funktionsweise der einzelnen Elemente dieser Website.</p> 
-   </div> 
+    <p>Hier findest du technische Informationen z.B. über die eingesetzten Technologien,<br> 
+   	sowie der Funktionsweise der einzelnen Elemente dieser Website.</p>
+   	<br>
+   	<h4>Architektur</h4> 
+    <img src="Architekturbild.png" alt="architektur" width="700" height="450"/>
+    <div id="box5">
+    <ol>
+	<li><strong>HTML/CSS</strong>: Für das FrontEnd nutzen wir eine statische HTML Seite. Design-Elemente wurden über eine ausgelagerte CSS-Datei eingebunden. Eng verknüpft mit HTML und CSS sind diverse JavaScript Dateien zur Dynamisierung unserer GUI.</li>
+	<li><strong>JavaScript</strong>: JavaScript kommt zum Einsatz, um dynamische Inhalte in der statischen HTML Seite darzustellen. Zudem nutzen wir JS um vom Client Requests in Richtung REST API zu stellen und die zurückgelieferten Responses z.B. für Ausgaben auf dem Bildschirm oder Diagramme, aufzugreifen.</li>
+	<li><strong>Rest API</strong>: In Java/SpringBoot haben wir zwei RESTController geschrieben. Einer dient als Schnittstelle für Abfragen einer ArrayList welche Zahlungen verwaltet. Die Zweite REST Schnittstelle wurde zur Verwaltung von Zahlungen in einer nachgelagerten Datenbank (MariaDB) erstellt.</li>
+	<li><strong>JAVA/SpringBoot</strong>: Neben den bereits erwähnten REST-Schnittstellen haben wir in Java unser Datenmodell welches durch entsprechende Klassen repräsentiert wird. Zudem wurden auch im Java-Backend die RepositoryKlassen für die ArrayList, und die MariaDB erzeugt, welche unseren geschmeidigen Übergang z.B. um MariaDB, steuern.</li>
+	<li><strong>Repository</strong>: Die Verwaltung von Zahlungen für die ArrayList findet in Java statt. Die Daten sind aber nur während der Laufzeit des Backends verfügbar. Für die persistente Speicherung haben wir in Java/SpringBoot auch eine Repository Klasse für die MariaDB geschrieben. Über diese kommunizieren wir mit unserer Datenbank.</li>
+	<li><strong>MariaDB</strong>: Für unsere Applikation dient zur dauerhaften Speicherung eine relationale SQL-Datenbank (MariaDB) welche lokal auf dem Computer (localhost) zur Verfügung steht.</li>
+	<li><strong>WebDatenbank</strong>: Wir wollten noch eine Stufe weitergehen und haben auch eine Datenbank (MySQL) auf einem WebServer angelegt.</li>
+	<li><strong>PHP Rest API</strong>: Für die WebDatenbank wurde auch eine REST-Schnittstelle benötigt. Wir haben dies in PHP umgesetzt. Die PHP-REST-API liegt ebenfalls auf dem WebServer und ist unsere Schnittstelle für eine Kommunikation. Dadurch wurde auch außerhalb der vier Wände unseres Computers die Verwaltung von Zahlungen möglich.</li>
+	<li><strong>APP/Web-Zugriff</strong>: Um die erweiterten Möglichkeiten einer WebDatenbank auf einem WebServer zu demonstrieren haben wir noch ein einfaches iPhone App in Swift/SwiftUI entwickelt, welches auch die Zahlungen aus der WebDatenbank darstellen kann.</li>
+</ol>
+    </div>
+    <br><br><br>
+   	<h4>REST-API</h4>
+   	<div id="box1">
+   	<h5>Java/SpringBoot Backend -lokale Datenbank-</h5>
+   	<p>In einer Klasse (ZahlungenController.java) wurden folgende Schnittstellen angelegt:<p>
+    <table class="tg">
+	<thead>
+  	<tr>
+    	<th class="tg-0lax">REST-Service</th>
+    	<th class="tg-0lax">URL</th>
+    	<th class="tg-0lax">Beschreibung</th>
+  	</tr>
+	</thead>
+	<tbody>
+  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/zahlungenDB</td>
+  		<td class="tg-0lax">Rückgabe aller Datensätze aus der lokalen Datenbank.</td>
+  	</tr>
+  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/oneZahlungDB/{id}</td>
+  		<td class="tg-0lax">Rückgabe des angefragten Datensatzes (ID) aus der lokalen Datenbank.</td>
+  	</tr>
+  	  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/umsatzDB</td>
+  		<td class="tg-0lax">Rückgabe der Zahlungseingänge und Zahlungsausgänge aus der lokalen Datenbank.</td>
+  	</tr>
+  	  	  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/anzahlDB</td>
+  		<td class="tg-0lax">Rückgabe Anzahl der Datensätze aus der lokalen Datenbank.</td>
+  	</tr>
+  	  	  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/umsatzDB</td>
+  		<td class="tg-0lax">Rückgabe der Zahlungseingänge und Zahlungsausgänge aus der lokalen Datenbank.</td>
+  	</tr>
+  	  	  	  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/*kategorie*UmsatzDB</td>
+  		<td class="tg-0lax">Rückgabe von Umsätzen nach Kategorie aus der lokalen Datenbank.</td>
+  	</tr>
+  	<tr>
+  		<td class="tg-0lax">POST</td>
+  		<td class="tg-hmp3">/newZahlungDB/</td>
+  		<td class="tg-0lax">Erstellen eines neuen Datensatzes in der lokalen Datenbank.</td>
+  	</tr>
+  	  	<tr>
+  		<td class="tg-0lax">DELETE</td>
+  		<td class="tg-hmp3">/deleteZahlungDB/{id}</td>
+  		<td class="tg-0lax">Löschen des übergebenen Datensatzes (ID) aus der lokalen Datenbank.</td>
+  	</tr>	
+</tbody>
+</table>
+</div>
+   	
+   	<div id="box1">
+   	<h5>Java/SpringBoot Backend -ArrayList-</h5>
+   	<p>In einer Klasse (TransacktionController.java) wurden folgende Schnittstellen angelegt:<p>
+    <table class="tg">
+	<thead>
+  	<tr>
+    	<th class="tg-0lax">REST-Service</th>
+    	<th class="tg-0lax">URL</th>
+    	<th class="tg-0lax">Beschreibung</th>
+  	</tr>
+	</thead>
+	<tbody>
+  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/zahlungen/</td>
+  		<td class="tg-0lax">Rückgabe aller Datensätze aus der ArrayList.</td>
+  	</tr>
+  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/zahlung/{id}</td>
+  		<td class="tg-0lax">Rückgabe des angefragten Datensatzes (ID) aus der ArrayList.</td>
+  	</tr>
+  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/info/</td>
+  		<td class="tg-0lax">Rückgabe Info über Anzahl Datensätze in der ArrayList.</td>
+  	</tr>
+  	<tr>
+  		<td class="tg-0lax">POST</td>
+  		<td class="tg-hmp3">/createTestdata/{anzahl}</td>
+  		<td class="tg-0lax">Es werden die übergebene Anzahl an Testdaten erzeugt und in der ArrayList abgelegt.</td>
+  	</tr>
+  	<tr>
+  		<td class="tg-0lax">POST</td>
+  		<td class="tg-hmp3">/zahlung/</td>
+  		<td class="tg-0lax">Erstellen eines neuen Datensatzes in der ArrayList.</td>
+  	</tr>
+  	<tr>
+  		<td class="tg-0lax">PUT</td>
+  		<td class="tg-hmp3">/zahlung/{id}</td>
+  		<td class="tg-0lax">Update des übergebenen Datensatzes (id) in der ArrayList.</td>
+  	</tr>	
+  	  	<tr>
+  		<td class="tg-0lax">DELETE</td>
+  		<td class="tg-hmp3">/zahlung/{id}</td>
+  		<td class="tg-0lax">Löschen des übergebenen Datensatzes (id) aus der ArrayList.</td>
+  	</tr>	
+</tbody>
+</table>
+</div>
+   	<div id="box1">
+   	<h5>PHP Webserver Backend</h5>
+   	<p>In einer PHP-Datei auf dem Webserver (overview.php) wurden folgende Schnittstellen angelegt:<p>
+    <table class="tg">
+	<thead>
+  	<tr>
+    	<th class="tg-0lax">REST-Service</th>
+    	<th class="tg-0lax">URL</th>
+    	<th class="tg-0lax">Beschreibung</th>
+  	</tr>
+	</thead>
+	<tbody>
+  	<tr>
+  		<td class="tg-0lax">GET</td>
+  		<td class="tg-hmp3">/overview.php</td>
+  		<td class="tg-0lax">Rückgabe aller Datensätze aus der Web Datenbank.</td>
+  	</tr>
+  	<tr>
+  		<td class="tg-0lax">POST</td>
+  		<td class="tg-hmp3">/add.php</td>
+  		<td class="tg-0lax">Neuen Datensatz in der Web Datenbank anlegen.</td>
+  	</tr>
+ </tbody>
+</table>
+<p>Da PHP kein direktes Thema der SEA war, haben wir lediglich zum Testen einer REST-Schnittstelle<br>
+   	auf einem Webserver eine GET- und POST-Schnittstelle zum Anzeigen aller Daten aus einer Datenbank auf dem Webserver <br>
+   	erstellt. DELETE, und weitere Schnittstellen haben wir uns an dieser Stelle aus Zeitgründen gespart.<p>
+</div>
+</div>
 </body>
-
 </html>

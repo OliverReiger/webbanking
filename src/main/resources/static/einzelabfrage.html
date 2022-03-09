@@ -5,18 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="myCSS.css" >
-<script type="text/javascript" defer src="einzelabfrage.js" type="module"></script>
 <title>Web-Banking</title>
 </head>
-
 <body>
-
 <header id="header" class="floatbox">
   <div id="header-content" class="floatbox">
-    	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
+    	<p>this tool is made with <a href="/bug.html"><img src="heart.png" alt="love" width="25" height="25"/></a> by SEA </p>
   </div>
 </header>
-
 <div class="sidenav">
   <h2>Web-Banking</h2>
   <br/>
@@ -27,24 +23,149 @@
   <a href="/doku.html">Technische Dokumentation</a>
   <a href="/credits.html">Credits</a>
 </div>
-
 <div class="main">
-	<br/>
 	<h3>Einzelabfrage</h3>
 	<p>Gib die ID einer Zahlung ein, die du im Detail betrachten willst:</p>
-	<p>Derzeit befinden sich folgende IDs für eine Betrachtung in der Datenbank: <span id="info"> </span> !</p>
+	<p>Derzeit befinden sich folgende IDs für eine Betrachtung in der Datenbank: <span id="infoDB"> </span> !<br>
+	<span id="infoArrayA"></span> <span id="infoArray"></span> <span id="infoArrayB"></span></p>
 	<br/>
+	<div id="beschriftung">Id:</div> <input id="id" type="text"> <br>
 	<div id="beschriftung">Empfänger:</div> <input id="empfaenger" type="text"> <br>
     <div id="beschriftung">IBAN:</div> <input id="iban" type="text"><br>
     <div id="beschriftung">BIC:</div> <input id="bic" type="text"><br>
     <div id="beschriftung">Betrag:</div> <input id="betrag" type="text"><br>
     <div id="beschriftung">Währung:</div> <input id="waehrung" type="text"><br>
     <div id="beschriftung">Verwendungszweck:</div> <input id="verwendungszweck" type="text"><br>
+    <div id="beschriftung">Kategorie:</div> <input id="kate" type="text"><br>
     <br>
 	<div id="beschriftung">ID prüfen: </div> <input id="input" type="text"><br/>
+	<div id=beschriftung>Ziel:</div> <select name="Ziel" id="ziel">
+  	<option value="lokaleDatenbank">Lokale Datenbank</option>
+    <option value="lokaleArrayList">Lokale ArrayList</option>
+    <option value="webDatenbank">Web Datenbank</option>
+  </select><br> 
+	<br>
     <button class="btn" id="btn1" type="button">Daten abrufen</button>
-
 </div> 
-
 </body>
+<script>
+document.getElementById("btn1").addEventListener("click", auswahl);
+
+function auswahl() {
+	var auswahl = document.getElementById("ziel").value;
+	if (auswahl == "lokaleDatenbank") {
+		auslesenDB();
+	} else if (auswahl == "lokaleArrayList") {
+		auslesenArray();			
+		} else if (auswahl == "webDatenbank") {
+			console.log("Dies wird derzeit nicht unterstützt!")
+		}
+}
+
+
+function auslesenDB() {
+	var eingabeIDuser = document.getElementById("input").value;
+	// var jsonURL = "zahlung/" + eingabeIDuser; -> Array List
+	var jsonURL = "/oneZahlungDB/" + eingabeIDuser;
+	// Verarbeitung
+        fetch(jsonURL)
+        .then(jsonAuspacken)               // Aufruf der Methode empfaenger1
+        .then(jsonVerarbeitenDB);          // Aufruf der Methode empfaenger2
+}
+
+function auslesenArray() {
+	var eingabeIDuser = document.getElementById("input").value;
+	var jsonURL = "zahlung/" + eingabeIDuser;
+	// Verarbeitung
+        fetch(jsonURL)
+        .then(jsonAuspacken)               // Aufruf der Methode empfaenger1
+        .then(jsonVerarbeitenArray);          // Aufruf der Methode empfaenger2
+}
+
+function jsonAuspacken(antwort) {
+    var json = antwort.json();  			// Datenpaket auspacken
+    return json;                			// Datenpaket zurückgeben an Aufrufer der Funktion
+}
+
+function jsonVerarbeitenDB(json) {
+	var id					= json.id;
+    var empfaenger 			= json.empfaenger; 
+    var iban 				= json.empfaengerIBAN.iban; 
+    var bic 				= json.empfaengerBIC;
+    var betrag 				= json.betrag;
+    var waehrung 			= json.waehrung;
+    var verwendungszweck 	= json.verwendungszweck;
+    var kategorie		 	= json.kategorie;
+    document.getElementById("id").value					= id;
+    document.getElementById("empfaenger").value			= empfaenger;
+    document.getElementById("iban").value				= iban;
+    document.getElementById("bic").value				= bic;
+    document.getElementById("betrag").value				= betrag;
+    document.getElementById("waehrung").value 			= waehrung;
+    document.getElementById("verwendungszweck").value   = verwendungszweck;
+    document.getElementById("kate").value   			= kategorie;
+}
+
+function jsonVerarbeitenArray(json) {
+	var id					= document.getElementById("input").value;
+    var empfaenger 			= json.empfaenger; 
+    var iban 				= json.empfaengerIBAN; 
+    var bic 				= json.empfaengerBIC;
+    var betrag 				= json.betrag;
+    var waehrung 			= json.waehrung;
+    var verwendungszweck 	= json.verwendungszweck;
+    document.getElementById("id").value					= id;
+    document.getElementById("empfaenger").value			= empfaenger;
+    document.getElementById("iban").value				= iban;
+    document.getElementById("bic").value				= bic;
+    document.getElementById("betrag").value				= betrag;
+    document.getElementById("waehrung").value 			= waehrung;
+    document.getElementById("verwendungszweck").value   = verwendungszweck;
+}
+
+
+function dbIds() {
+        fetch("/zahlungenDB")
+        .then(jsonAuspacken)            		     // Aufruf der Methode empfaenger1
+        .then(empfaengerInfo2);                // Aufruf der Methode empfaenger2
+}
+
+function empfaengerInfo2(json) {
+	
+	var links = [];
+	var myjson = json;
+	
+	for(let i in json) {
+	    links.push(json[i].id)
+	}
+	
+	document.getElementById("infoDB").innerHTML = links
+};
+
+
+// ABFRAGE aus ARRAY LIST
+function arrayIds() {
+    var jsonURL = "info/";
+	     fetch(jsonURL)
+        .then(jsonAuspacken)              		  
+        .then(empfaengerArrayInfo2);              // Aufruf der Methode empfaenger2
+}
+
+
+function empfaengerArrayInfo2(json) {
+	if (json == 0) {
+		document.getElementById("infoArrayA").innerHTML = "Für Abfragen aus der ArrayList stehen ";
+		document.getElementById("infoArray").innerHTML = "KEINE ";
+		document.getElementById("infoArrayB").innerHTML = "Ids zur Verfügung!";
+	} else {
+		document.getElementById("infoArrayA").innerHTML = "Für Abfragen aus der ArrayList stehen ";
+		document.getElementById("infoArray").innerHTML = json;
+		document.getElementById("infoArrayB").innerHTML = "Ids zur Verfügung!";
+	}
+};
+
+
+dbIds();
+arrayIds();
+</script>
 </html>

@@ -4,15 +4,44 @@ document.getElementById("zufall").addEventListener("click", zufall);
 document.getElementById("test").addEventListener("click", testdata);
 
 function testdata() {
+	
+	var auswahl = document.getElementById("zieltestdaten").value
 	var anzahl = document.getElementById("anzt").value;
-	for (var i = 0; i < anzahl; i++) {
-		zufall();
-		post();
+	
+	if (auswahl == "lokaleDatenbank") {
+		for (var i = 0; i < anzahl; i++) {
+			zufall();
+			post();
+			}
+	
+	} else if (auswahl == "lokaleArrayList") {
+		var link = "/createTestdata/" + anzahl
+		window.location = link;
+		
+	} else if (auswahl == "webDatenbank") {
+		for (var i = 0; i < anzahl; i++) {
+			zufall();
+			postWeb();
+			}
 	}
 }
 
-// Neuen Eintrag an REST API senden
 function post() {
+	var auswahl = document.getElementById("ziel").value
+	
+	if (auswahl == "lokaleDatenbank") {
+		postDB();
+	} else if (auswahl == "lokaleArrayList") {
+		postAL();
+	} else if (auswahl == "webDatenbank")
+		postWeb();
+}
+
+
+
+
+// Neuen Eintrag an REST API lokale DB senden
+function postDB() {
 	// Eingaben prüfen
 		if (document.getElementById("empf").value == "") {
 			alert("Du musst auch einen Empfänger angeben!");
@@ -27,7 +56,7 @@ function post() {
 		} else if (document.getElementById("verw").value == "") {
 			alert("Du musst auch einen Verwendungszweck angeben!");
 		} else if (document.getElementById("kate").value == "") {
-			alert("Du musst auch einen Verwendungszweck angeben!");
+			alert("Du musst auch eine Kategorie auswählen!");
 		} else {	
 	
 	// Eingaben auslesen
@@ -57,6 +86,102 @@ function post() {
 	).then(alert("Danke für die Nutzung unseres Webservices! Es wurden Ihnen Gebühren in Höhe von 0,05 Euro in Rechnung gestellt!"))
 	}
 }
+
+
+// Neuen Eintrag an REST API ArrayList senden
+function postAL() {
+	// Eingaben prüfen
+		if (document.getElementById("empf").value == "") {
+			alert("Du musst auch einen Empfänger angeben!");
+		} else if (document.getElementById("iban").value == "") {
+			alert("Du musst auch eine IBAN angeben!");
+		} else if (document.getElementById("bic").value == "") {
+			alert("Du musst auch eine BIC angeben!");
+		} else if (document.getElementById("betr").value == "") {
+			alert("Du musst einen Betrag angeben!");
+		} else if (document.getElementById("waeh").value == "") {
+			alert("Du musst eine Währung angeben!");
+		} else if (document.getElementById("verw").value == "") {
+			alert("Du musst auch einen Verwendungszweck angeben!");
+		} else if (document.getElementById("kate").value == "") {
+			alert("Du musst auch eine Kategorie auswählen!");
+		} else {	
+	
+	// Eingaben auslesen
+	var input = {
+		empfaenger: 		document.getElementById("empf").value,
+		empfaengerIBAN: 	document.getElementById("iban").value,
+		empfaengerBIC: 		document.getElementById("bic").value,
+		betrag: 	  		document.getElementById("betr").value,
+		waehrung:   		document.getElementById("waeh").value,
+		verwendungszweck: 	document.getElementById("verw").value,	
+		}
+	
+	// String in json umwandeln
+	var json = JSON.stringify(input)
+	
+	// Daten senden
+	// fetch("/zahlung/", -> ArrayList
+	fetch("/zahlung/",
+	{
+		headers: {"Content-Type":"application/json"},
+		method: "POST",
+		body: json
+	}
+	
+	// Bestätigung ausgeben
+	).then(alert("Danke für die Nutzung unseres Webservices! Es wurden Ihnen Gebühren in Höhe von 0,05 Euro in Rechnung gestellt!"))
+	}
+}
+
+
+// Neuen Eintrag an REST API ArrayList senden
+function postWeb() {
+	// Eingaben prüfen
+		if (document.getElementById("empf").value == "") {
+			alert("Du musst auch einen Empfänger angeben!");
+		} else if (document.getElementById("iban").value == "") {
+			alert("Du musst auch eine IBAN angeben!");
+		} else if (document.getElementById("bic").value == "") {
+			alert("Du musst auch eine BIC angeben!");
+		} else if (document.getElementById("betr").value == "") {
+			alert("Du musst einen Betrag angeben!");
+		} else if (document.getElementById("waeh").value == "") {
+			alert("Du musst eine Währung angeben!");
+		} else if (document.getElementById("verw").value == "") {
+			alert("Du musst auch einen Verwendungszweck angeben!");
+		} else if (document.getElementById("kate").value == "") {
+			alert("Du musst auch eine Kategorie auswählen!");
+		} else {	
+	
+	// Eingaben auslesen
+	var input = {
+		empfaenger: 		document.getElementById("empf").value,
+		empfaengerIBAN: 	document.getElementById("iban").value,
+		empfaengerBIC: 		document.getElementById("bic").value,
+		betrag: 	  		document.getElementById("betr").value,
+		waehrung:   		document.getElementById("waeh").value,
+		verwendungszweck: 	document.getElementById("verw").value,	
+		}
+	
+	// String in json umwandeln
+	var json = JSON.stringify(input)
+	
+	// Daten senden
+	// fetch("/zahlung/", -> ArrayList
+	fetch("https://www.streetball-summer-league.de/add.php",
+	{
+		mode:'cors',
+		headers: {"Content-Type":"application/json"},
+		method: "POST",
+		body: json
+	}
+	
+	// Bestätigung ausgeben
+	).then(alert("Danke für die Nutzung unseres Webservices! Es wurden Ihnen Gebühren in Höhe von 0,05 Euro in Rechnung gestellt!"))
+	}
+}
+
 
 function zufall() {
 	

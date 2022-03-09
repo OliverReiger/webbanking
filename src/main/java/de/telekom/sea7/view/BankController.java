@@ -23,9 +23,6 @@ public class BankController {
 	@Autowired
 	ZahlungenImplService zahlungen;
 	
-	
-	
-	
 	// Aufruf über http://localhost:8080/test/?kontonummer=1234 gibt diese Kontonummer zurück
 	@GetMapping("/test/")
 	@ResponseBody

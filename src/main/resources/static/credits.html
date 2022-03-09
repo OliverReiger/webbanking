@@ -5,33 +5,505 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="myCSS.css" >
-<script defer src="credits.js" type="module" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <title>Web-Banking</title>
 </head>
-
 <header id="header" class="floatbox">
 	<div id="header-content">
-  	<p>this tool is made with <img src="heart.png" alt="love" width="25" height="25"/> by SEA </p>
+  	<p>this tool is made with <a href="/bug.html"><img src="heart.png" alt="love" width="25" height="25"/></a> by SEA </p>
   	</div>
 </header>
-
+<style>
+span {
+	color: green;
+}
+</style>
 <body>
-
-<div class="sidenav">
-  <h2>Web-Banking</h2>
-  <br/>
-  <a href="/index.html">Home</a>
-  <a href="/neuezahlung.html">Neue Zahlung</a>
-  <a href="/einzelabfrage.html">Einzelabfrage</a>
-  <a href="/allezahlungen.html">Übersicht Transaktionen</a>
-  <a href="/doku.html">Technische Dokumentation</a>
-  <a href="/credits.html">Credits</a>
+	<div class="sidenav">
+  		<h2>Web-Banking</h2><br/>
+  		<a href="/index.html">Home</a>
+  		<a href="/neuezahlung.html">Neue Zahlung</a>
+  		<a href="/einzelabfrage.html">Einzelabfrage</a>
+  		<a href="/allezahlungen.html">Übersicht Transaktionen</a>
+  		<a href="/doku.html">Technische Dokumentation</a>
+  		<a href="/credits.html">Credits</a>
+	</div>
+	<div class="main">
+		<h3>Credits und Fun Facts</h3>
+    	<img src="team.png" alt="team" width="600" height="300"/>
+    	<h4>Zahlen Daten Fakten</h4>
+    	<p>Die SEA 7 startete am <strong>01.12.2021</strong>. In den vergangenen <strong><span id="timer"></span></strong> haben<br>
+    	wir viel Code geschrieben und noch mehr gelernt. Die nachfolgeden Zahlen, Daten und Fakten sollen ein<br>
+    	wenig verdeutlichen, wie intensiv die BootCamp-Phase war, und was die Deutsche Telekom für ihr Investment<br>
+    	in uns erhalten hat.<p>
+    	<p>Diese Website und die im Backend arbeitende Anwendung ist step by step entstanden. Im Zuge neu<br/>
+    	erlernter Materie und damit verbundenen Übungen ist auch viel entwickelter Code wieder entfernt worden.<br/>
+   		Trotz dieser Tatsache enstand mit dieser Webseite ein relativ umfangreiches "Projektstück".<br>
+   		Um den Umfang der Arbeit/Übungen der SEA zu verdeutlichen, hier ein paar interessante Zahlen:<p>
+    <div id="box1">
+    	<table class="tg">
+			<thead>
+  				<tr>
+    				<th class="tg-0lax"></th>
+    				<th class="tg-0lax">Dateien</th>
+    				<th class="tg-0lax">Codezeilen</th>
+  				</tr>
+			</thead>
+			<tbody>
+  				<tr>
+  					<td class="tg-0lax">HTML</td>
+  					<td class="tg-hmp3">7</td>
+    				<td class="tg-0lax">835</td>
+  				</tr>
+  				<tr>
+  	 				<td class="tg-0lax">CSS</td>
+  	 				<td class="tg-hmp3">1</td>
+   	 				<td class="tg-0lax">305</td>
+  				</tr>
+  				<tr>
+  	 				<td class="tg-0lax">JavaScript</td>
+  	 				<td class="tg-hmp3">2</td>
+   	 				<td class="tg-0lax">749</td>
+  				</tr>
+  	  			<tr>
+  	 				<td class="tg-0lax">Java</td>
+  	 				<td class="tg-hmp3">14</td>
+   	 				<td class="tg-0lax">1.103</td>
+   	 			</tr>
+  	  			<tr>
+  	 				<td class="tg-0lax">PHP</td>
+  	 				<td class="tg-hmp3">2</td>
+   	 				<td class="tg-0lax">35</td>
+   	 			</tr>
+  	  			<tr>
+  	 				<td class="tg-0lax">Swift/SwiftUI</td>
+  	 				<td class="tg-hmp3">7</td>
+   	 				<td class="tg-0lax">443</td>
+  				</tr>
+  	  			<tr>
+  	 				<td class="tg-0lax"><strong>Gesamt</strong></td>
+  	 				<td class="tg-hmp3"><strong>33</strong></td>
+   	 				<td class="tg-0lax"><strong>3.470</strong></td>
+  				</tr>
+			</tbody>
+		</table>
+	</div>   
+    <div id="box1">
+		<canvas id="myChart" style="width:100%;max-width:450px;max-height:650px">
+		</canvas>
+	</div>
+	<div id="box1">
+	</div>
+	
+    <div id="box3">
+    	<h4>SEA Themen</h4>
+    	<p>Mit folgenden Themen/Schlagworten haben wir uns während der BootCamp-Phase der SEA beschäftigt.<br/>
+    	Mit einem Mouseover erhältst du eine Kurzbeschreibung zum jeweiligen Stichwort.<p>
+     	<div class="tt"><strong>Linux (Ubuntu)</strong><span class="ttt">Ubuntu, auch Ubuntu Linux, ist eine GNU/Linux-Distribution, die auf Debian basiert.</span></div>
+     
+     	<div class="tt"><strong>bash</strong><span class="ttt">Als Shell ist Bash eine Mensch-Maschine-Schnittstelle, die eine Umgebung bereitstellt, in der zeilenweise Texteingaben und -ausgaben möglich sind. Letzteres erfolgt über die Befehlszeile, in die Befehle eingetippt und durch Betätigen der Eingabetaste eingegeben werden.</span></div>
+     	<div class="tt">Vim<span class="ttt">Vim ist eine Weiterentwicklung des Texteditors vi. Das freie Open-Source-Programm ist ein einfacher Texteditor für die bash.</span></div>
+     	<div class="tt">Git<span class="ttt">Git für die bash ist eine einfache Möglichkeit eine Versionskontrolle zu nutzen.</span></div>
+     	<div class="tt">branch<span class="ttt">So wird ein eigener Zweig genannt. I.d.R. wird ein eigener Zweig für eine neue Entwicklung in Git angelegt. Nach Beendigung der Arbeit findet ein merge in den Hauptstrang des Codes statt.</span></div>
+     	<div class="tt">commit<span class="ttt">Ein Git Commit speichert einen neuen Stand einer Entwicklung in der Versionskontrolle.</span></div>
+     	<div class="tt">merge<span class="ttt">Nach Abschluss einer Entwicklung in einem eigenem Strang (branch) wird mittels merge der neue Code in den Hauptstrang integriert.</span></div>
+     
+     	<div class="tt"><strong>GitHub</strong><span class="ttt">GitHub ist ein Online-Service für die Versionskontrolle. Es erweitert die Möglichkeiten von git. Dadurch ist eine einfache Zusammenarbeit am gleichen Quellcode in Teams möglich.</span></div>
+     	<div class="tt">pull<span class="ttt">Mittels git pull können neuere Inhalte eines GitHub Repositorys auf den lokalen Rechner geladen werden.</span></div>
+     	<div class="tt">push<span class="ttt">Mittels git push können neuere Inhalte eines lokalen Repositorys in Richtung GitHub gesendet werden.</span></div>
+         
+     	<div class="tt"><strong>IDE</strong><span class="ttt">Integrated Development Environment, bezeichnet man integrierte Entwicklungsumgebungen welche die Entwicklung durch Features wie z.B. Syntax-Highlighting vereinfachen.</span></div>
+     	<div class="tt">Visual Studio Code<span class="ttt">Visual Studio Code ist ein kostenloser Quelltext-Editor von Microsoft. Er ist plattformübergreifend für die Betriebssysteme Windows, macOS und Linux verfügbar.</span></div>
+     	<div class="tt">Eclipse<span class="ttt">Eclipse ist ein open-source Programmierwerkzeug zur Entwicklung von Software verschiedener Art. Ursprünglich wurde Eclipse als integrierte Entwicklungsumgebung (IDE) für die Programmiersprache Java genutzt, aber mittlerweile wird es wegen seiner Erweiterbarkeit auch für viele andere Entwicklungsaufgaben eingesetzt.</span></div>
+     	<div class="tt">Debugging<span class="ttt">Unter Debugging versteht man Möglichkeiten Code schrittweise auszuführen um Fehler im Programmablauf zu finden.</span></div>
+     
+     	<div class="tt"><strong>Basics</strong><span class="ttt">Es gibt zahlreiche Basics in der IT.</span></div>
+     	<div class="tt">json<span class="ttt">Die JavaScript Object Notation ist ein kompaktes Datenformat in einer einfach lesbaren Textform für den Datenaustausch zwischen Anwendungen.</span></div>
+     	<div class="tt">xml<span class="ttt">Die Extensible Markup Language ist eine Auszeichnungssprache zur Darstellung hierarchisch strukturierter Daten im Format einer Textdatei, die sowohl von Menschen als auch von Maschinen lesbar ist.</span></div>
+  	 	<div class="tt">csv<span class="ttt">Ein sehr verbreitetes Dateiformat in dem die Daten kommasepariert gespeichert werden.</span></div>
+  	 	<div class="tt">charset<span class="ttt">Charset ist der Zeichensatz, in dem etwas geschrieben ist. Z.B. UTF-8.</span></div>
+  	 	<div class="tt">Schleifen<span class="ttt">Mit Schleifen lässt sich etwas bis zum Erreichen einer Abbruchbedingung durchführen.</span></div>
+  	 	<div class="tt">Entscheidungen<span class="ttt">Entscheidungen können im Code i.d.R. mit if/else formuliert werden.</span></div>
+  	 	<div class="tt">Datenbanken<span class="ttt">In Datenbanken ist die persistente und effiziente Speicherung von Datensätzen möglich.</span></div>
+     	<div class="tt">Request<span class="ttt">Als Request bezeichnet man die Anfrage an einen Server.</span></div>
+     	<div class="tt">Response<span class="ttt">Als Response bezeichnet man die Antwort eines Servers.</span></div>
+     	<div class="tt">UUID<span class="ttt">Als UUID wird ein eineindeutige ID bezeichnet die maschinell nach bestimmten Algorhytmen erzeugt wird.</span></div>
+     
+     	<div class="tt"><strong>Datentypen</strong><span class="ttt">In jeder Programmiersprache begegnen uns fundamentale Datentypen wie int, short, long, byte, char, double, float...</span></div>
+     	<div class="tt">String<span class="ttt">Bei einem String handelt es sich um eine Zeichenkette, also Text!</span></div>
+     	<div class="tt">boolean<span class="ttt">In Java ist boolean einer von 8 fundamentalen Datentypen. Er repräsentiert immer true oder false.</span></div>
+     	<div class="tt">byte<span class="ttt">In Java ist byte einer von 8 fundamentalen Datentypen. Er wird für Ganzzahlen in einem Wertebereich von 8 bit genutzt.</span></div>
+     	<div class="tt">int<span class="ttt">In Java ist int einer von 8 fundamentalen Datentypen. Er wird für Ganzzahlen in einem Wertebereich von 32 bit genutzt.</span></div>
+     	<div class="tt">short<span class="ttt">In Java ist short einer von 8 fundamentalen Datentypen. Er wird für Ganzzahlen in einem Wertebereich von 16 bit genutzt.</span></div>
+     	<div class="tt">char<span class="ttt">In Java ist char einer von 8 fundamentalen Datentypen. Er wird speichert exakt einen Buchstaben.</span></div>
+     	<div class="tt">float<span class="ttt">In Java ist float einer von 8 fundamentalen Datentypen. Er wird für Fließkommazahlen im Wertebereich von 32 bit eingesetzt.</span></div>
+     	<div class="tt">long<span class="ttt">In Java ist long einer von 8 fundamentalen Datentypen. Er speichert Ganzzahlen in einem Wertebereich von 64 bit.</span></div>
+     	<div class="tt">double<span class="ttt">In Java ist char einer von 8 fundamentalen Datentypen. Er speichert Dezimalzahlen in einem Wertebereich von 64 bit.</span></div>
+     
+     	<div class="tt"><strong>HTML</strong><span class="ttt">Die Hypertext Markup Language ist eine textbasierte Auszeichnungssprache zur Strukturierung elektronischer Dokumente wie Texte mit Hyperlinks, Bildern und anderen Inhalten.</span></div>
+   	 	<div class="tt">URL<span class="ttt">Als URL bezeichnet man die Adresse, welche im Browser zum Aufruf beispielsweise einer Website genutzt wird.</span></div>
+   	 	<div class="tt">Browser<span class="ttt">Tool zur Darstellung von Websites. Er bietet auch gute Analysemöglichkeiten für Entwickler.</span></div>
+  	 	<div class="tt">tags<span class="ttt">HTML Tags helfen bei der Ausgestaltung und der Darstellung einer Website. Es gibt hier zahlreiche Tags wie body, main, html, etc.</span></div>
+  	 	<div class="tt">header<span class="ttt">In Header Tags (h1, h2, h3, etc.) lassen sich Überschriften in HTML darstellen.</span></div>
+  	 	<div class="tt">p<span class="ttt">Der Paragraph Tag (p) kennzeichnet Testabsätze in HTML Code.</span></div>
+  	 	<div class="tt">ul<span class="ttt">Das HTML Element unordered list wird verwendet um eine ungeordnete Liste darzustellen.</span></div>
+  	 	<div class="tt">ol<span class="ttt">Das HTML Element ordered list wird verwendet, um eine geordnete Liste zu definieren. Die Aufzählung kann in unterschiedlichen Formen geschehen, darunter Buchstaben, römische Zahlen und reguläre Zahlen.</span></div>
+  	 	<div class="tt">table<span class="ttt">Mit dem HTML table tag kann man Tabellen auf einer Website erstellen.</span></div>
+  	 	<div class="tt">input<span class="ttt">Ein input Tag ist in HTML ein Eingabefeld. Hier kann der User Daten eingeben.</span></div>
+  	 	<div class="tt">button<span class="ttt">Ein Button-Tag ermöglicht bei Click Aktionen auszuführen.</span></div>
+  	 	<div class="tt">div<span class="ttt">Das HTML-Element div ist ein allgemeiner Container für fließenden Inhalt ohne semantische Bedeutung.</span></div>
+  	 	<div class="tt">span<span class="ttt">Das span-Element ist ein Element ohne semantische Bedeutung. Es dient nur dazu Textbereiche anders formatieren zu können.</span></div>
+  	 	<div class="tt">br<span class="ttt">Das HTML Element line break produziert einen Zeilenumbruch in (Fließ-)Text.</span></div>
+  	 
+  	 	<div class="tt"><strong>CSS</strong><span class="ttt"> Cascading Style Sheets ist eine Stylesheet-Sprache und zusammen mit HTML und JavaScript eine der Kernsprachen des World Wide Webs.</span></div>
+  	 	<div class="tt">margin<span class="ttt">Die margin Eigenschaft ist eine Kurzform für die Außenabstände aller vier Seiten eines Elements.</span></div>
+  	 	<div class="tt">padding<span class="ttt">Die padding Eigenschaft ist eine Kurzform für die Innenabstände aller vier Seiten eines Elementes.</span></div>
+  	 	<div class="tt">id<span class="ttt">Mit # kann man Styles für Elemente in der HTML Seite definieren, welche mit einer ID getaggt sind.</span></div>
+  	 	<div class="tt">class<span class="ttt">Mit einem Punkt( . ) kann man Styles für Elemente in der HTML Seite definieren, welche als class getaggt sind.</span></div>
+  	 
+  	 	<div class="tt"><strong>JavaScript</strong><span class="ttt">JavaScript ist eine Client-Skriptsprache für dynamisches HTML in Webbrowsern. Es ermöglicht Benutzerinteraktionen, Auswertungen, Inhalte zu verändern etc.</span></div>
+  	 	<div class="tt">getElementById<span class="ttt">Eine tolle Methode mit der man auf Elemente einer HTML Seite zugreifen kann. Erst dadurch eröffnen sich Möglichkeiten einer Dynamisierung.</span></div>
+  	 	<div class="tt">fetch<span class="ttt">Mit der Fetch API bietet JavaScript eine Schnittstelle zum Abrufen von Ressourcen.</span></div>
+  	 	<div class="tt">JSON.Decoder<span class="ttt">In Java existiert ein JSON Decoder. Die Methode dieses Decoders eignet sich hervorragend um json Response einer REST-Schnittstelle zu extrahieren.</span></div>
+  	   	<div class="tt">EventListener<span class="ttt">Mit einem Event-Listener kann man auf z.B. den Click auf einen Button lauschen um anschließend eine angegebene Funktion auszuführen.</span></div> 
+  	   	 
+  	   	<div class="tt"><strong>Thymeleaf</strong><span class="ttt">Thymeleaf ist eine Server-Skriptsprache für dynamisches HTML in Webbrowsern. Es ermöglicht Benutzerinteraktionen, Auswertungen, Inhalte zu verändern etc.</span></div>
+  	   	<div class="tt">Template-Engine<span class="ttt">Neben Thymeleaf gibt es auch zahlreiche andere Template-Engines die zumindest Erwähnung gefunden haben wie z.B. FreeMaker oder Apache Velocity.</span></div>  
+  	   	 
+  	 	<div class="tt"><strong>Java</strong><span class="ttt">Java ist eine objektorientierte Programmiersprache.</span></div>
+  	 	<div class="tt">jdk<span class="ttt">Das Java-Developer-Kit ist eine Sammlung von Libarys und Tools um mit Java programmieren zu können.</span></div>
+  	 	<div class="tt">JAVAC<span class="ttt">Bei Java-C handelt es sich um den Compiler, der Programmcode in maschinenlesbaren Bytecode umwandelt.</span></div>
+  	 	<div class="tt">JVM<span class="ttt">Die Java Virtual Machine ist die virtuelle Umgebung in der das fertige Programm läuft.</span></div>
+  	 	<div class="tt">JShell<span class="ttt">Mit der JShell lässt sich Java Code direkt in der bash ausführen. Es ist eine gute Möglichkeit Code zu testen.</span></div>
+  	 	<div class="tt">jar<span class="ttt">jar steht für Java-Archiv. Dieses Archiv entsteht duch den Build und bündelt die Klassen des Programms.</span></div>
+  	 	<div class="tt">Klassen<span class="ttt">Klassen repräsentieren die Objekte im Detail. Sie werden mit Properties und Methoden beschrieben.</span></div>
+  	 	<div class="tt">Java.Object.lang<span class="ttt">Dies ist die Mutter aller Klassen. Von Object.lang erben alle Klassen. Ihre Methoden stehen IMMER zur Verfügung.</span></div>
+  	 	<div class="tt">Interfaces<span class="ttt">Ein Interface wird von einer Klasse abstrahiert. In einem Interface findet man lediglich eine Auflistung der Methoden der referenzierten Klasse.</span></div>
+  	 	<div class="tt">Zugriffssteuerung<span class="ttt">Einsatz von private oder public in Klassen.</span></div>
+  	 	<div class="tt">Methoden<span class="ttt">Programmcode der aufgerufen werden kann.</span></div>
+  	 	<div class="tt">Factory-Methode<span class="ttt">Als Factory-Methode bezeichnet man eine Methode die direkt eine Instanz bereitstellt.</span></div>
+  	 	<div class="tt">Getter/Setter<span class="ttt">Spezielle Methoden die den Zugriff auf private Variablen erlauben.</span></div>
+  	 	<div class="tt">new<span class="ttt">Erzeugt eine neue Instanz (Objekt) einer Klasse. Dabei wird ein Konstruktor aufgerufen.</span></div>
+  	 	<div class="tt">return<span class="ttt">Gibt einen vorher definierten Wert am Ende einer Methode zurück.</span></div>
+  	 	<div class="tt">this<span class="ttt">Referenz auf sich selbst.</span></div>
+  	 	<div class="tt">Constructor<span class="ttt">Eine Methode in Klasse die ein Objekt nach definierten Eigenschaften erstellt. Jede Klasse hat einen Constructor. Dieser kann individuell sein oder von java.lang kommen.</span></div>
+  	 	<div class="tt">Generics<span class="ttt">Es gibt die Möglichkeiten von generischen Klassen in Java. Durch Generics lassen sich wiederkehrende Klassen und Methoden universell schreiben.</span></div>
+  	 	<div class="tt">Beans<span class="ttt">JavaBeans entwickelten sich aus der Notwendigkeit heraus, GUI-Klassen (AWT, Swing) einfach zu instanziieren.</span></div>
+  	 	<div class="tt">Exceptions<span class="ttt">Bei Exception, bzw. Exception-Handling geht es um das Abfangen von möglichen Ausnahmen/Fehlern im Programmcode.</span></div>
+  	 	<div class="tt">Iterator<span class="ttt">Der Iterator ist zuständig um Objekte zu durchlaufen. Er kommt aus einer Schnittstelle/Klasse von Java.</span></div>
+  	 	<div class="tt">ArrayList<span class="ttt">Bei der ArrayList (die aus einer Schnittstelle/Klasse von java stammt) handelt es sich um eine komfortablere Version für ein Array.</span></div>
+  	 	<div class="tt">jdbc<span class="ttt">Java Database Connectivity (JDBC, englisch für Java Datenbankverbindungsfähigkeit) ist eine Datenbankschnittstelle in Java. Einen entsprechenden Treiber benötigt man für die Verbindung zu einer Datenbank.</span></div>
+  	 	<div class="tt">Unit-Test<span class="ttt">Ein Unittest wird in der Softwareentwicklung angewendet um einzelne abgrenzbare Teile von Computerprogrammen, z. B. ausgewählte Codeabschnitte, Module, Unterprogramme oder Klassen zu testen.</span></div>
+  	 	<div class="tt">StringFormater<span class="ttt">Mit Java String Format Specifiers lässt sich die Ausgabe von Strings optisch komfortabel aufbereiten.</span></div>
+  	 	<div class="tt">Static-Variable<span class="ttt">Mit einer static Variable kann eine zentrale Variable erstellt werden. So etwas eignet sich z.B. für die Vergabe einer UUID.</span></div>
+  	 	<div class="tt">lambda<span class="ttt">Lambda-Ausdrücke in Java sind quasi Methoden ohne Namen. Sie bestehen aus einer Liste von formalen Parametern, einem Pfeil -> und einem Funktionsrumpf.</span></div>
+  	 	  	 
+  	 	<div class="tt"><strong>Maven</strong><span class="ttt">Java ist eine objektorientierte Programmiersprache.</span></div>
+  	 	<div class="tt">POM.xml<span class="ttt">Externe Pakete lassen sich prima über eine POM.xml z.b. aus dem Maven Repository einbinden.</span></div>
+  	 	<div class="tt">Dependencys<span class="ttt">Es gibt zahlreiche externe Libarys die man als Dependencys einfügen kann. Z.B. für JDBC Treiber, BUILD-Manager oder Spring Boot.</span></div>
+  	   	 
+  	 	<div class="tt"><strong>Spring Boot</strong><span class="ttt">Das Spring Framework ist ein quelloffenes Framework für die Java-Plattform, welches oft für Web-Anwendungen verwendet wird. Ziel des Spring Frameworks ist es, die Entwicklung mit Java/Java EE zu vereinfachen und gute Programmierpraktiken zu fördern.</span></div>
+  	 	<div class="tt">Annotationen<span class="ttt">Annotationen werden für SpringBoot Code zur Steuerung und Programmierung verwendet.</span></div>
+  	 	<div class="tt">Bean-Lifecycle<span class="ttt">Durch die technische Kenntnis des Bean-Lifecycle haben wir die Möglichkeit mit entsprechenden Annotationen in bestimmten Zeitpunkten bei der Erstellung und Zerstörung einer Bean mit eigenen Methoden aktiv zu werden.</span></div>
+  	 	<div class="tt">@SpringBootApplication<span class="ttt">Diese Annotation kennzeichnet, dass es sich um eine SpringBoot-Anwendung handelt.</span></div>
+  	 	<div class="tt">@Component<span class="ttt">@Component ist eine Anmerkung, die es Spring ermöglicht, unsere benutzerdefinierten Beans automatisch zu erkennen.</span></div>
+  	 	<div class="tt">@Service<span class="ttt">Diese Annotation wird für eine Klasse verwendet. Der Service markiert eine Java-Klasse, die einen Dienst ausführt, z. B. Geschäftslogik </span></div>
+  	 	<div class="tt">@Controller<span class="ttt">@Controller wird verwendet, um anzugeben, dass es sich bei der Klasse um einen Spring-Controller (für eine View) handelt.</span></div>
+  	 	<div class="tt">@RestController<span class="ttt">Diese Annotation wird auf Klassenebene verwendet. Der @RestController markiert die Klasse als Controller, bei dem jede Methode ein Domänenobjekt anstelle einer Ansicht zurückgibt.</span></div>
+  	 	<div class="tt">@Repository<span class="ttt">Diese Annotation wird für Java-Klassen verwendet, die direkt auf die Datenbank zugreifen. Sie fungiert als Marker für die Klasse, die die Rolle eines Repositorys oder Datenzugriffsobjekts erfüllt.</span></div>
+  	 	<div class="tt">@Entity<span class="ttt">Bei einer Entity handelt es sich um einen Datensatz. Die passende Annotation kennzeichnet dies.</span></div>
+  	 	<div class="tt">@Column<span class="ttt">Kennzeichnet eine Variable einer Klasse als Spalte in einer Datenbanktabelle.</span></div>
+  	 	<div class="tt">@ID<span class="ttt">Kennzeichnet in Verbindung mit der Datenbank eine ID.</span></div>
+  	 	<div class="tt">@ManyToOne<span class="ttt">Kennzeichnet in Verbindung mit Datenbanken eine ManyToOne Verbindung zwischen Tabellen.</span></div>
+  	 	<div class="tt">@OneToMany<span class="ttt">Kennzeichnet in Verbindung mit Datenbanken eine OneToMany Verbindung zwischen Tabellen.</span></div>
+  	 	<div class="tt">@Query<span class="ttt">Kennzeichnet in einer Repository-Klasse SQL Statements für die DB Abfragen.</span></div>
+  	 	<div class="tt">@PathVariable<span class="ttt">Diese Annotation wird zum markieren von Methodenargumenten des Anforderungshandlers verwendet.</span></div>
+  	 	<div class="tt">@RequestParam<span class="ttt">Diese Annotation wird ebenfalls zum markieren von Methodenargumenten des Anforderungshandlers verwendet.</span></div>
+  	 	<div class="tt">@GetMapping<span class="ttt">Diese Annotation wird verwendet, um HTTP-GET-Anforderungen bestimmten Handler-Methoden zuzuordnen.</span></div>
+  	 	<div class="tt">@DeleteMapping<span class="ttt">Diese Annotation wird verwendet, um HTTP-DELETE-Anforderungen bestimmten Handler-Methoden zuzuordnen.</span></div>
+  	 	<div class="tt">@PostMapping<span class="ttt">Diese Annotation wird verwendet, um HTTP-POST-Anforderungen bestimmten Handler-Methoden zuzuordnen.</span></div>
+  	 	<div class="tt">@PutMapping<span class="ttt">Diese Annotation wird verwendet, um HTTP-PUT-Anforderungen bestimmten Handler-Methoden zuzuordnen.</span></div>
+  	 	<div class="tt">@RequestMapping<span class="ttt">Diese Annotation wird sowohl auf Klassen- als auch auf Methodenebene verwendet. Sie wird verwendet, um Webanforderungen bestimmten Handler-Klassen und Handler-Methoden zuzuordnen.</span></div>
+  	 	<div class="tt">@ResponseBody<span class="ttt">Diese Annotation wird verwendet, um Request-Handler-Methoden zu kommentieren. Der @ResponseBody ähnelt der @RequestBody Annotation.</span></div>
+  	 	<div class="tt">@Autowired<span class="ttt">Die @Autowired Annotation fügt implizit Objektabhängigkeit ein.</span></div>
+  	 	<div class="tt">@PostConstruct<span class="ttt">Kennzeichnet eine Methode die im Bean-Lifecycle vor dem Abschluss des Constructors ausgeführt wird.</span></div>
+  	 	<div class="tt">@PreDestroy<span class="ttt">Kennzeichnet eine Methode die im Bean-Lifecycle kurz vor dem zerstören eines Objekts ausgeführt werden sollen.</span></div>
+  	 	<div class="tt">@Value<span class="ttt">Diese Annotation gibt einen Standardwertausdruck für das Feld oder den Parameter an, mit dem die Eigenschaft initialisiert werden soll.</span></div>
+  	 	<div class="tt">@BeforeEach<span class="ttt">Annotation für den Test. Diese Methode wird vor Beginn jedes Tests angewendet.</span></div>
+  	 	<div class="tt">@Test<span class="ttt">Annotation für Methoden die dem Test dienen.</span></div>
+  	 	<div class="tt">@AfterEach<span class="ttt">Annotation für den Test. Das Gegenstück zu BeforeEach. Diese Methode wird nach Ende jedes Tests angewendet.</span></div>
+  	 	  	 
+  	 	<div class="tt"><strong>Datenbanken</strong><span class="ttt">Eine Datenbank ermöglicht die Persistierung von Daten.</span></div>
+  	 	<div class="tt">MariaDB<span class="ttt">MariaDB ist ein freies, relationales Open-Source-Datenbankmanagementsystem, das durch eine Abspaltung aus MySQL entstanden ist.</span></div>
+  	 	<div class="tt">SQL<span class="ttt">SQL ist eine Datenbanksprache zur Definition von Datenstrukturen in relationalen Datenbanken sowie zum Bearbeiten (Einfügen, Verändern, Löschen) und Abfragen von darauf basierenden Datenbeständen.</span></div>
+  	 	<div class="tt">SELECT<span class="ttt">Befehl zur Suche nach etwas in einer SQL-Datnbank.</span></div>
+  	 	<div class="tt">INSERT<span class="ttt">Befehl zum Einfügen von Daten in einer SQL-Datnbank.</span></div>
+  	 	<div class="tt">UPDATE<span class="ttt">Befehl zur Aktualisierung von Daten in einer SQL-Datnbank.</span></div>
+  	 	<div class="tt">DELETE<span class="ttt">Befehl zum Löschen von Daten in einer SQL-Datnbank.</span></div>  	 
+  	 	<div class="tt">JOINS<span class="ttt">Möglichkeit Daten aus mehreren Tabellen in einer Ausgabe zu verknüpfen.</span></div>
+  	 	<div class="tt">LEFT_JOIN<span class="ttt">Zur Tabelle A wird eine Schnittmenge aus einer Tabelle B dazugefügt.</span></div>
+  	 	<div class="tt">RIGHT_JOIN<span class="ttt">Zu einer Schnittmenge Tabelle A wird die komplette Tabelle B dazugefügt.</span></div>	 
+  	 	<div class="tt">INNER_JOIN<span class="ttt">Lediglich Schnittmengen von Tabelle A und Tabelle B werden ermittelt und ausgegeben.</span></div>	
+  	 	<div class="tt">ALTER<span class="ttt">Befehl um an der Struktur von Tabellen einer Datenbank etwas zu ändern.</span></div>
+  	 	<div class="tt">ADD COLUMN<span class="ttt">Zusätzliche Spalte hinzufügen. In Kombination mit ALTER möglich.</span></div>
+  	 	<div class="tt">CREATE TABLE<span class="ttt">Erzeugt eine neue Tabelle.</span></div>
+  	 	<div class="tt">VIEW<span class="ttt">Views sind extra erzeugte Ansichten von einer oder mehreren Tabellen.</span></div>
+  	 	<div class="tt">CREATE VIEW<span class="ttt">Erzeugt eine neue View.</span></div>
+  	 	<div class="tt">WHERE<span class="ttt">Mit einer WHERE-Klausel können in Verbindung mit einem SELECT Kriterien zur Eingrenzung der Datenmenge gemacht werden.</span></div>
+  	   	<div class="tt">GROUPBY<span class="ttt">Hierbei handelt es sich um eine Möglichkeit die ermittelte Datenmenge aus dem Select zu gruppieren.</span></div>
+  	   	<div class="tt">SORT<span class="ttt">Mit Sort können die ermittelten Datensätze aus einem SELECT z.B. auf- oder absteigend sortiert werden.</span></div>
+  	   	<div class="tt">ALIAS<span class="ttt">SQL bietet die Möglichkeit Tabellennamen, Spalte, etc. innerhalb des Statements einem Alias zu geben. Dies kann gerade in Verbindung mit JOINS interessant sein.</span></div> 
+  	   	<div class="tt">auto_increment<span class="ttt">Aktiviert man diese Option dann vergibt die Datenbank selbst IDs für neue Einträge.</span></div> 
+  	   	<div class="tt">Constraint<span class="ttt">Verknüpft Daten zwischen Tabellen.</span></div>
+  	   	<div class="tt">FOREIGN KEY<span class="ttt">Mit einem Foreign Key kann eine Verknüpfung erstellt werden, die beim Löschen prüft ob diese überhaupt erlaubt ist.</span></div>
+  	   	 
+  	 	<div class="tt"><strong>Konzepte</strong><span class="ttt">Es gibt zahlreiche Konzepte in der IT und der Programmierung die wir besprochen haben.</span></div>
+  	 	<div class="tt">Objektorientierung<span class="ttt">tbd</span></div>
+  	 	<div class="tt">Vererbung<span class="ttt">tbd</span></div>
+  	 	<div class="tt">MVC<span class="ttt">Model View Controller ist ein Konzept zur Unterteilung einer Software in die drei Komponenten Datenmodell (englisch model), Präsentation (englisch view) und Programmsteuerung (englisch controller).</span></div>
+  	 	<div class="tt">Server/Client<span class="ttt">Das Client-Server-Modell beschreibt eine Möglichkeit, Aufgaben und Services innerhalb eines Netzwerkes zu verteilen. Die Aufgaben werden von Programmen erledigt, die in Clients und Server unterteilt werden.</span></div>
+  	 	<div class="tt">REST<span class="ttt">Representational State Transfer ist eine Abstraktion der Struktur und des Verhaltens des World Wide Web. Eine entsprechende Schnittstelle ermöglicht eine einfache Kommunikation über GET, POST, PUT, DELETE etc.</span></div>
+  	 	<div class="tt">CRUD<span class="ttt">Das Akronym CRUD umfasst die vier grundlegenden Operationen persistenter Speicher: Create, Read, Update, Delete.</span></div>
+  	 	<div class="tt">Software-Test<span class="ttt">Es gibt viele Testkonzepte. Als Programmierer befasst man sich vor allem mit Test-Klassen und Test-Methoden für den Software-Code.</span></div>
+	</div><br><br>
+  <div id="box3">
+    <h4>Wild Code School - Quests -</h4>
+    <p>Wie Wild Code School stellte uns zahlreiche Quests zu unterschiedlichen Themen bereit.<br/>
+    In diesen Quests wurden Sachverhalte vermittelt. Zum Abschluss der Quests musste man dann <br>
+    entsprechende Übungen einreichen. Hier eine kleine Übericht über die Themenbereiche und die Anzahl der Quests.<p>
+  <div id="box1">
+    <table class="tg">
+		<thead>
+  			<tr>
+    			<th class="tg-0lax">Themebereich</th>
+    			<th class="tg-0lax">Anzahl Quests</th>
+  			</tr>
+		</thead>
+		<tbody>
+  			<tr>
+  				<td class="tg-0lax">Start learning with Wild Code School</td>
+  				<td class="tg-hmp3">1</td>
+  			</tr>
+  			<tr>
+  	 			<td class="tg-0lax">Soft Skills</td>
+  	 			<td class="tg-hmp3">24</td>
+  			</tr>
+  			<tr>
+  	 			<td class="tg-0lax">Unix</td>
+  	 			<td class="tg-hmp3">1</td>
+  			</tr>
+  	  		<tr>
+  	 			<td class="tg-0lax">Git</td>
+  	 			<td class="tg-hmp3">7</td>
+   	 		</tr>
+  	  		<tr>
+  	 			<td class="tg-0lax">JavaScript</td>
+  	 			<td class="tg-hmp3">2</td>
+   	 		</tr>
+  	  		<tr>
+  	 			<td class="tg-0lax">Java</td>
+  	 			<td class="tg-hmp3">5</td>
+  			</tr>
+  	   		<tr>
+  	 			<td class="tg-0lax">Java Advanced</td>
+  	 			<td class="tg-hmp3">2</td>
+  			</tr>
+  	  		<tr>
+  	 			<td class="tg-0lax">Spring</td>
+  	 			<td class="tg-hmp3">4</td>
+  			</tr>
+  	   		<tr>
+  	 			<td class="tg-0lax">Database</td>
+  	 			<td class="tg-hmp3">2</td>
+  			</tr>
+  	   		<tr>
+  	 			<td class="tg-0lax"><strong>Gesamt</strong></td>
+  	 			<td class="tg-hmp3"><strong>52</strong></td>
+  			</tr>
+		</tbody>
+	</table>
+	<div id="box3">
+    <h4>Linksammlung</h4>
+    <p>Im Zuge der SEA Vorträge und den Quests der Wild Code School haben wir uns auch mit zahlreichen<br/>
+    Webseiten auseinandergesetzt. Die Wichtigsten und Informativsten haben wir hier nochmals in einer <br>
+    Liste aufgeführt.<p>
+  <div id="box1">
+    <table class="tg">
+		<thead>
+  			<tr>
+    			<th class="tg-0lax">Link</th>
+    			<th class="tg-0lax">Beschreibung</th>
+  			</tr>
+		</thead>
+		<tbody>
+  			<tr>
+  				<td class="tg-0lax">https://chat.wilders.dev/home</td>
+  				<td class="tg-hmp3">Wild Code School Chat</td>
+  			</tr>
+  			<tr>
+  	 			<td class="tg-0lax">https://odyssey.wildcodeschool.com/</td>
+  	 			<td class="tg-hmp3">Odyssey (Plattform mit den Quests)</td>
+  			</tr>
+  			<tr>
+  	 			<td class="tg-0lax">https://www.grund-wissen.de/</td>
+  	 			<td class="tg-hmp3">Grundwissen Linux</td>
+  			</tr>
+  	  		<tr>
+  	 			<td class="tg-0lax">https://www.cs.cmu.edu/~15131/f17/topics/vim/vim-cheatsheet.pdf</td>
+  	 			<td class="tg-hmp3">VIM CheetSheet</td>
+   	 		</tr>
+  	  		<tr>
+  	 			<td class="tg-0lax">https://mvnrepository.com/</td>
+  	 			<td class="tg-hmp3">Maven Repository</td>
+   	 		</tr>
+  	  		<tr>
+  	 			<td class="tg-0lax">https://www.selenium.dev/</td>
+  	 			<td class="tg-hmp3">Selenium</td>
+  			</tr>
+  	   		<tr>
+  	 			<td class="tg-0lax">https://site.mockito.org/</td>
+  	 			<td class="tg-hmp3">Mockito</td>
+  			</tr>
+  	  		<tr>
+  	 			<td class="tg-0lax">https://junit.org/junit5/</td>
+  	 			<td class="tg-hmp3">JUnit</td>
+  			</tr>
+  	   		<tr>
+  	 			<td class="tg-0lax">https://spring.io/</td>
+  	 			<td class="tg-hmp3">SpringBoot</td>
+  			</tr>
+  			<tr>
+  	 			<td class="tg-0lax">https://dev.mysql.com/downloads/connector/j/</td>
+  	 			<td class="tg-hmp3">SQL Connector/J</td>
+  			</tr>
+  			<tr>
+  	 			<td class="tg-0lax">https://maven.apache.org/</td>
+  	 			<td class="tg-hmp3">Maven</td>
+  			</tr>
+		</tbody>
+			
+	</table>	
+	<div id="box3">
+    <h4>JAVA und Kaffee -</h4>
+    <img src="java.png" alt="team" width="150" height="100"/>
+    <p>Programmierung, Java und Kaffee gehören irgendwie zusammen. Zudem hat nicht nur die<br/>
+    Deutsche Telekom in uns viel Geld investiert. Auch wir investierten viel!<p>
+  <div id="box1">
+  	<div id="beschriftung">Tassen Peggy:</div> <input id="peggy" type="text"> <br>
+	<div id="beschriftung">Tassen Elisabeth:</div> <input id="elisa" type="text"> <br>
+    <div id="beschriftung">Tassen Oli:</div> <input id="oli" type="text"><br>
+    <div id="beschriftung">Anzahl Tage:</div> <input id="tage" type="text"><br>
+	<div id=beschriftung>Sorte:</div> <select name="Sorte" id="sorte">
+  	<option value="Standard">Standard Qualität</option>
+    <option value="Mittelklasse">Mittelklasse Qualität</option>
+    <option value="Deluxe">Deluxe Genießer Qualität</option>
+    </select><br> 
+	<br>
+    <button class="btn" id="kafbtn" type="button">Check</button>
+    </div>
+    <p style="color:blue;">
+    <span id="einleitung"></span>
+    <strong><span id="gesamttassen"></span></strong>
+    <span id="mittel"></span>
+    <strong><span id="kaffeekosten"></span></strong>
+    <span id="ende"></span>
+    </p>
+    <p><strong><span id="spenden"></span></strong></p>
 </div>
-
-<div class="main">
-	<h3>Credits & Fun Facts</h3>
-    <p>Hier ein paar Infos über die Entstehung dieser Seite.</p> 
-   </div> 
+</div>
+</div>
+</div>
+</div>
 </body>
+<script>
+//CHART
+function verteilungCode() {
+	var xValues = ["HTML", "CSS", "JS", "Java", "PHP", "Swift"];
+	var yValues = [835, 305, 749, 1103, 35, 443];
+	var barColors = [
+		  "#b91d47",
+		  "#00aba9",
+		  "#2b5797",
+		  "#e8c3b9",
+		  "#1e7145",
+		  "#4c6612"
+		];
 
+	new Chart("myChart", {
+		  type: "pie",
+		  data: {
+		    labels: xValues,
+		    datasets: [{
+		      backgroundColor: barColors,
+		      data: yValues
+		    }]
+		  },
+		  options: {
+		    title: {
+		      display: true,
+		      text: "Verteilung Codezeilen"
+		    }
+		  }
+		})
+	};
+	
+// AUTOSTART CHART
+document.getElementById("kafbtn").addEventListener("click", check);
+
+function check() {
+	var peggy = document.getElementById("peggy").value;
+	var elisa = document.getElementById("elisa").value;
+	var oli = document.getElementById("oli").value;
+	var anzahl = document.getElementById("tage").value;
+	var sorte = document.getElementById("sorte").value;
+	var einleitung = "Insgesamt wurden durch unsere kleine Gruppe ";
+	var mittel = "Tassen getrunken. Wir haben damit ";
+	var ende = " Euro in unsere Aufmerksamkeit investiert!";
+	var spende = "Spenden werden natürlich jederzeit angenommen! Sprecht uns gerne darauf an!";
+	var ergebnis = 0;
+	var wirdrei = parseInt( peggy) + parseInt(elisa) + parseInt(oli);
+	var tassengesamt = wirdrei * anzahl;
+	
+	if (sorte == "Standard") {
+		ergebnis = wirdrei  * 0.08 * anzahl;
+		document.getElementById("einleitung").innerHTML = einleitung;
+		document.getElementById("gesamttassen").innerHTML = tassengesamt;
+		document.getElementById("mittel").innerHTML = mittel;
+		document.getElementById("kaffeekosten").innerHTML = ergebnis;
+		document.getElementById("ende").innerHTML = ende;
+		document.getElementById("spenden").innerHTML = spende;
+	} else if (sorte == "Mittelklasse") {
+		ergebnis = wirdrei  * 0.13 * anzahl;
+		document.getElementById("einleitung").innerHTML = einleitung;
+		document.getElementById("gesamttassen").innerHTML = tassengesamt;
+		document.getElementById("mittel").innerHTML = mittel;
+		document.getElementById("kaffeekosten").innerHTML = ergebnis;
+		document.getElementById("ende").innerHTML = ende;
+		document.getElementById("spenden").innerHTML = spende;
+		} else if (sorte == "Deluxe") {
+			ergebnis = wirdrei  * 0.16 * anzahl;
+			document.getElementById("einleitung").innerHTML = einleitung;
+			document.getElementById("gesamttassen").innerHTML = tassengesamt;
+			document.getElementById("mittel").innerHTML = mittel;
+			document.getElementById("kaffeekosten").innerHTML = ergebnis;
+			document.getElementById("ende").innerHTML = ende;
+			document.getElementById("spenden").innerHTML = spende;
+		}
+}
+
+verteilungCode();
+	
+//COUNTER/TIMER
+var countDownDate = new Date("DEC 1, 2021 08:00:00").getTime();
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = now - countDownDate;
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  document.getElementById("timer").innerHTML = days + " Tagen " + hours + " Stunden "
+  + minutes + " Minuten " + seconds + " Sekunden ";
+}, 1000);
+</script>
 </html>

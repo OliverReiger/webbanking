@@ -18,7 +18,7 @@ public class ZahlungenImplService implements Zahlungen {
 		int tester = 1;
 		for (int i=0; i < anzahl; i++) {
 			Zahlung testdata = new ZahlungImplService();
-			testdata.setEmpfaenger("Tester " + tester);
+			testdata.setEmpfaenger("Tester ArrayList " + tester);
 			testdata.setEmpfaengerIBAN("DEIBANTEST " + tester);
 			testdata.setEmpfaengerBIC("BICTEST " + tester);
 			testdata.setBetrag(tester+tester+tester + 0.95);
@@ -28,8 +28,6 @@ public class ZahlungenImplService implements Zahlungen {
 			tester++;
 		}
 	}
-	
-	
 	
 	public double summeArrayList() {
 		double umsatz = 0;
@@ -57,7 +55,6 @@ public class ZahlungenImplService implements Zahlungen {
 		double umsatzChristof = 0;
 		double umsatzAndre = 0;
 		double umsatzFelix = 0;
-		
 		
 		String ergebnis = "";
 			Iterator<Zahlung> tempZahlungIterator = zahlungen.iterator();
